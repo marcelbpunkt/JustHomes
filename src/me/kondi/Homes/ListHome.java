@@ -25,6 +25,7 @@ public class ListHome implements CommandExecutor {
 				return true;
 			}
 			Player p = (Player) sender;
+			
 			if(!plugin.cfgManager.getHomes().contains("Users." + p.getUniqueId()))
 			{
 				p.sendMessage("[JHomes] " + ChatColor.RED + "You dont have any homes!");

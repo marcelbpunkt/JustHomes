@@ -76,7 +76,7 @@ public class Sethome implements CommandExecutor {
 	
 	public void saveLoc(Player p, String s)
 	{
-		plugin.cfgManager.getHomes().set("Users." + p.getUniqueId() +  ".Username" , p.getDisplayName());
+		plugin.cfgManager.getHomes().set("Users." + p.getUniqueId() +  "." + s + ".Username" , p.getDisplayName());
 		plugin.cfgManager.getHomes().set("Users." + p.getUniqueId() +  "." + s + ".World", p.getLocation().getWorld().getName());
 		plugin.cfgManager.getHomes().set("Users." + p.getUniqueId() +  "." + s + ".X", p.getLocation().getX());
 		plugin.cfgManager.getHomes().set("Users." + p.getUniqueId() +  "." + s + ".Y", p.getLocation().getY());

@@ -132,6 +132,7 @@ public class Home implements CommandExecutor, TabCompleter {
 					Set<String> keys = plugin.cfgManager.getHomes().getConfigurationSection("Users." + p.getUniqueId()).getKeys(false);
 					for(String home : keys)
 					{
+						
 						homes.add(home);
 					}
 				}
