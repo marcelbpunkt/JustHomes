@@ -46,27 +46,11 @@ public class ListHome implements CommandExecutor {
 					p.sendMessage("[JHomes] " + ChatColor.GREEN + "[List of your homes]");
 					for(int i = 0; i<iter; i++)
 					{
-						
-						
-						
 						p.sendMessage(i + ". " + ChatColor.GOLD + keys.toArray()[i].toString());
-						
-						
 					}
-					
 				}
-				
-				
 			}
-			
-			
-			
-				
-		
 		}
-		
-	
 		return true;
-	
 	}
 }

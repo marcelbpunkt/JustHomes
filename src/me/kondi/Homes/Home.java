@@ -14,7 +14,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-
 import org.bukkit.entity.Player;
 
 
@@ -54,9 +53,9 @@ public class Home implements CommandExecutor, TabCompleter {
 			{
 				
 				Set<String> keys = plugin.cfgManager.getHomes().getConfigurationSection("Users." + p.getUniqueId()).getKeys(false);
-				for(int i = 0; i<keys.size(); i++)
+				for(String key : keys)
 				{
-					if(args[0].equalsIgnoreCase(keys.toArray()[i].toString()))
+					if(args[0].equalsIgnoreCase(key))
 					{
 						String wconfig = plugin.cfgManager.getHomes().getString("Users." + p.getUniqueId() +  "." + args[0] + ".World");
 						World world = Bukkit.getWorld(wconfig);
@@ -87,18 +86,9 @@ public class Home implements CommandExecutor, TabCompleter {
 						
 						return true;
 					}
-					
-					
-						
-					
 				}
 					p.sendMessage("[JHomes] " + ChatColor.RED + "Unknown home name!");
 			}
-			
-				
-				
-				
-			
 		}
 		
 		return true;
@@ -109,10 +99,8 @@ public class Home implements CommandExecutor, TabCompleter {
 		if(cmd.getName().equalsIgnoreCase("jhome"))
 		{
 			
-			
 			if(args.length == 1)
 			{
-				
 				
 				ArrayList<String> homes = new ArrayList<String>();
 				
@@ -146,17 +134,7 @@ public class Home implements CommandExecutor, TabCompleter {
 				}
 				return homes;
 			}
-			
-			
-			
-			
-			
-			
 		}
-			return null;
-			
+			return null;	
 	}
-	
-
-	
 }

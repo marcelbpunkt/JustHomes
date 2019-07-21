@@ -61,16 +61,9 @@ public class Sethome implements CommandExecutor {
 						p.sendMessage("[JHomes] " + ChatColor.GREEN + "Home " + ChatColor.GOLD + args[0] + ChatColor.GREEN + " has been successfully saved!");
 			
 					}
-					
 				}
-				
-				
 			}
-			
-			
-			
 		}
-		
 		return true;
 	}
 	

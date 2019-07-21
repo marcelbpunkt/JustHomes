@@ -1,11 +1,11 @@
 package me.kondi.Homes;
 
 import org.bukkit.ChatColor;
-
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 	public ConfigManager cfgManager;
+	
 	@Override
 	public void onEnable() {
 		loadConfig();
@@ -16,10 +16,8 @@ public class Main extends JavaPlugin {
 		getCommand("jlisthome").setExecutor(new ListHome());
 		getCommand("jdelhome").setExecutor(new DeleteHome());
 		getCommand("jdelhome").setTabCompleter(new DeleteHome());
-		
-		
-		
 	}
+	
 	@Override
     public void onDisable() {
 		getServer().getConsoleSender().sendMessage("[JHomes] " + ChatColor.RED + "Not Working");
@@ -34,7 +32,6 @@ public class Main extends JavaPlugin {
 		cfgManager.reloadHomes();
 		cfgManager.reloadOptions();
 		cfgManager.getOptions().addDefault("HomesMaxAmount", 5);
-		
 		cfgManager.getOptions().options().copyDefaults(true);
 		cfgManager.saveOptions();
 	}

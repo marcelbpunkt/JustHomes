@@ -34,9 +34,9 @@ public class DeleteHome implements CommandExecutor, TabCompleter {
 			else
 			{
 				Set<String> keys = plugin.cfgManager.getHomes().getConfigurationSection("Users." + p.getUniqueId()).getKeys(false);
-				for(int i = 0; i<keys.size(); i++)
+				for(String key : keys)
 				{
-					if(args[0].equalsIgnoreCase(keys.toArray()[i].toString()))
+					if(args[0].equalsIgnoreCase(key))
 					{
 						plugin.cfgManager.getHomes().set("Users." + p.getUniqueId() +  "." + args[0], null );
 						plugin.cfgManager.saveHomes();
@@ -89,15 +89,7 @@ public class DeleteHome implements CommandExecutor, TabCompleter {
 				}
 				return homes;
 			}
-			
-			
-			
-			
-			
-			
 		}
-			return null;
-			
+			return null;	
 	}
-
 }
