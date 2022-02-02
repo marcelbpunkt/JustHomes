@@ -1,0 +1,44 @@
+name: JustHomes
+version: 1.17
+description: Homes plugin, create home and enjoy.
+api-version: 1.17
+author: Kondee
+main: me.kondi.JustHomes.Main
+commands:
+  sethome:
+    description: You can create homes with it.
+    usage: /<command> <homename>
+    aliases: sh
+  home:
+    description: Teleports you to your home.
+    usage: /<command> <homename>
+    aliases: h
+  listhome:
+    description: lists all your homes.
+    usage: /<command>
+    aliases: lh
+  delhome:
+    description: Deletes your home.
+    usage: /<command> <homename>
+    aliases: dh
+  loadlanguage:
+    description: Reload languages.
+    usage: /<command>
+
+permissions:
+  justhomes.sethome:
+    description: Allows you to create homes.
+    default: true
+  justhomes.home:
+    description: Allows you to teleport to homes.
+    default: true
+  justhomes.listhome:
+    description: Allows you to list your homes.
+    default: true
+  justhomes.delhome:
+    description: Allows you to delete your homes.
+    default: true
+  justhomes.loadlanguage:
+    description: Allows you to fast reload language.
+    default: op
+

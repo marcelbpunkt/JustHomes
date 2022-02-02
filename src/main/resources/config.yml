@@ -1,0 +1,22 @@
+#Specify max amount of homes for players
+HomesMaxAmount: 5
+
+#In seconds
+DelayInTeleport: 5
+
+#All available languages in documentation
+Language: English
+
+#Protects against setting home in air or above the lava.
+#Set to false if you dont want to use it.
+SimpleProtection: true
+
+#Database
+#Types:
+# - SQLITE - only DatabaseType, it's default
+# - MYSQL - fill all
+DatabaseType: SQLITE
+Host:
+DatabaseName:
+Username:
+Password:

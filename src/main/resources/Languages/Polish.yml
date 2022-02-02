@@ -1,0 +1,29 @@
+#Just Homes
+#Polish Language File
+
+#List
+UserHasNoHomes: "Nie zapisałeś jeszcze żadnych lokalizacji!"
+ListHomesTitle: "&e&l______________ &r&7Lista twoich domów &e&l______________"
+
+#SetHome
+SetOnlyOnGroundException: "Musisz stać na bloku aby to zrobić!"
+SpecifyHomeNameException: "Musisz nazwać swój dom!"
+CreatedHome: " został stworzony!"
+TooMuchHomesException: "Masz za dużo domów! Spróbuj kilka usunąć."
+UnknownHomeName: "Niewłaściwa nazwa domu!"
+EditedHome: " został poprawiony!"
+
+#Teleportation
+Teleporting: "Teleportacja za "
+Seconds: " sekund!"
+DontMove: " Nie ruszaj się!"
+SuccesfullTeleportation: "Zostałeś/aś pomyślnie teleportowany/a do "
+ActionBarNameWhileTeleporting: "Teleportacja..."
+TeleportationCancelled: "Teleportacja Anulowana!"
+UnavailableHome: "Nie można się już przeteleportować do tej lokalizacji!"
+
+#DeleteHome
+DeletedHome: " został pomyślnie usunięty!"
+
+#Other
+NotHumanException: "Nie jesteś graczem!"
