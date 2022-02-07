@@ -1,13 +1,13 @@
 package me.kondi.JustHomes.Permissions;
 
-import me.kondi.JustHomes.Main;
+import me.kondi.JustHomes.JustHomes;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
 public class PermissionChecker {
-    private Main plugin;
+    private JustHomes plugin;
 
-    public PermissionChecker(Main plugin) {
+    public PermissionChecker(JustHomes plugin) {
         this.plugin = plugin;
     }
 

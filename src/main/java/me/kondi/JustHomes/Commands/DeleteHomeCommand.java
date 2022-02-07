@@ -1,7 +1,9 @@
 package me.kondi.JustHomes.Commands;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.kondi.JustHomes.Data.PlayerData;
-import me.kondi.JustHomes.Main;
+import me.kondi.JustHomes.Home.HomeNames;
+import me.kondi.JustHomes.JustHomes;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -10,12 +12,12 @@ import java.util.Set;
 
 public class DeleteHomeCommand {
 
-    private Main plugin;
+    private JustHomes plugin;
     private String prefix;
     private HashMap<String, String> messages = new HashMap<>();
     private PlayerData playerData;
 
-    public DeleteHomeCommand(Main plugin) {
+    public DeleteHomeCommand(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
         this.messages = plugin.messages;
@@ -36,7 +38,7 @@ public class DeleteHomeCommand {
         }
 
         if (args.length == 0) {
-            p.sendMessage(prefix + ChatColor.RED + messages.get("SpecifyHomeNameException"));
+            p.sendMessage(prefix + messages.get("SpecifyHomeNameException"));
             return;
         }
 
@@ -45,8 +47,9 @@ public class DeleteHomeCommand {
         String homeName = args[0];
         for (String key : keys) {
             if (homeName.equalsIgnoreCase(key)) {
+                HomeNames.addHomeName(uuid, key);
                 playerData.deleteHome(uuid, homeName);
-                p.sendMessage(prefix + ChatColor.GOLD + args[0] + ChatColor.GRAY + messages.get("DeletedHome"));
+                p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("DeletedHome")));
                 return;
             }
         }

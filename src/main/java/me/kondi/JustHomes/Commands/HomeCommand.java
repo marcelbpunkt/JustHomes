@@ -2,7 +2,7 @@ package me.kondi.JustHomes.Commands;
 
 import me.kondi.JustHomes.Data.PlayerData;
 import me.kondi.JustHomes.Home.Home;
-import me.kondi.JustHomes.Main;
+import me.kondi.JustHomes.JustHomes;
 import me.kondi.JustHomes.Teleportation.TeleportPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,13 +16,12 @@ import java.util.Set;
 
 public class HomeCommand {
 
-    private final Main plugin;
-    private TeleportPlayer teleportPlayer;
+    private final JustHomes plugin;
     private String prefix;
     private HashMap<String, String> messages = new HashMap<>();
     private PlayerData playerData;
 
-    public HomeCommand(Main plugin) {
+    public HomeCommand(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
         this.messages = plugin.messages;
@@ -54,8 +53,8 @@ public class HomeCommand {
                 Location loc = new Location(world, home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch());
 
                 int duration = plugin.config.getInt("DelayInTeleport");
-                teleportPlayer = plugin.teleportPlayer;
-                teleportPlayer.teleportPlayer(p, loc, duration, homeName);
+
+                plugin.teleportPlayer.teleportPlayer(p, loc, duration, homeName);
                 return;
             }
         }

@@ -1,7 +1,7 @@
 package me.kondi.JustHomes.Data;
 
 import me.kondi.JustHomes.Home.Home;
-import me.kondi.JustHomes.Main;
+import me.kondi.JustHomes.JustHomes;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -11,10 +11,10 @@ import java.util.Set;
 
 public class PlayerData {
 
-    private Main plugin;
+    private JustHomes plugin;
     private ConsoleCommandSender console;
 
-    public PlayerData(Main plugin) {
+    public PlayerData(JustHomes plugin) {
         this.plugin = plugin;
         this.console = plugin.getServer().getConsoleSender();
     }

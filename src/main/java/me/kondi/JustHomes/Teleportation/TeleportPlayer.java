@@ -1,6 +1,7 @@
 package me.kondi.JustHomes.Teleportation;
 
-import me.kondi.JustHomes.Main;
+import me.clip.placeholderapi.PlaceholderAPI;
+import me.kondi.JustHomes.JustHomes;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -13,11 +14,11 @@ import java.util.HashMap;
 public class TeleportPlayer {
     public static HashMap<String, Integer> tpCooldown = new HashMap<>();
     public static HashMap<String, BukkitRunnable> tpCooldownTask = new HashMap<>();
-    private final Main plugin;
+    private final JustHomes plugin;
     private String prefix;
     private HashMap<String, String> messages = new HashMap<>();
 
-    public TeleportPlayer(Main plugin) {
+    public TeleportPlayer(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
         this.messages = plugin.messages;
@@ -26,7 +27,7 @@ public class TeleportPlayer {
 
     public void teleportPlayer(Player p, Location loc, int duration, String name) {
 
-        p.sendMessage(prefix + ChatColor.GRAY + messages.get("Teleporting") + ChatColor.GOLD + duration + ChatColor.GRAY + messages.get("Seconds") + ChatColor.RED + messages.get("DontMove"));
+        p.sendMessage(prefix + messages.get("Teleporting"));
         String uuid = p.getUniqueId().toString();
         tpCooldown.put(uuid, duration);
         tpCooldownTask.put(uuid, new BukkitRunnable() {
@@ -44,7 +45,7 @@ public class TeleportPlayer {
 
                 if (tpCooldown.get(uuid) == 0) {
                     p.teleport(loc);
-                    p.sendMessage(prefix + org.bukkit.ChatColor.GRAY + messages.get("SuccesfullTeleportation") + ChatColor.GOLD + name + ChatColor.GRAY + "!");
+                    p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p,messages.get("SuccesfullTeleportation")));
                     tpCooldownTask.get(uuid).cancel();
                     tpCooldown.remove(uuid);
                     tpCooldownTask.remove(uuid);

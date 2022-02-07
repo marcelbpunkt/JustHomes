@@ -2,7 +2,7 @@ package me.kondi.JustHomes.Commands;
 
 
 import me.kondi.JustHomes.Data.PlayerData;
-import me.kondi.JustHomes.Main;
+import me.kondi.JustHomes.JustHomes;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -11,12 +11,12 @@ import java.util.Set;
 
 public class ListHomeCommand {
 
-    private Main plugin;
+    private JustHomes plugin;
     private String prefix;
     private HashMap<String, String> messages = new HashMap<>();
     private PlayerData playerData;
 
-    public ListHomeCommand(Main plugin) {
+    public ListHomeCommand(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
         this.messages = plugin.messages;

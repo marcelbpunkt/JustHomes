@@ -2,22 +2,20 @@
 #English Language File
 
 #List
-UserHasNoHomes: "You don't have any homes!"
+UserHasNoHomes: "&cYou don't have any homes!"
 ListHomesTitle: "&e&l______________ &r&7List of your Homes &e&l______________"
 
 #SetHome
-SetOnlyOnGroundException: "You must be on the ground!"
-SpecifyHomeNameException: "You must specify a home name!"
-CreatedHome: " has been successfully created!"
-TooMuchHomesException: "You have too much homes! Try deleting any of them."
-UnknownHomeName: "Unknown home name!"
-EditedHome: " has been edited!"
+SetOnlyOnGroundException: "&cYou must be on the ground!"
+SpecifyHomeNameException: "&cYou must specify a home name!"
+CreatedHome: "%justhomes-homename% has been successfully created!"
+TooMuchHomesException: "&cYou have too much homes! Try deleting any of them."
+UnknownHomeName: "&cUnknown home name!"
+EditedHome: "%justhomes-homename% has been edited!"
 
 #Teleportation
-Teleporting: "Teleporting in "
-Seconds: " seconds!"
-DontMove: " Dont move!"
-SuccesfullTeleportation: "You were succesfully teleported to "
+Teleporting: "Teleporting in %justhomes-teleportationtime% seconds! &cDont move!"
+SuccesfullTeleportation: "You were succesfully teleported to &%justhomes-homename%!"
 ActionBarNameWhileTeleporting: "Teleporting..."
 TeleportationCancelled: "Teleportation Cancelled!"
 UnavailableHome: "That home is no longer available!"

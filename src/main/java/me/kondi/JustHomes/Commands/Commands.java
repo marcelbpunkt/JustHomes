@@ -1,24 +1,22 @@
 package me.kondi.JustHomes.Commands;
 
 
-import me.kondi.JustHomes.Main;
+import me.kondi.JustHomes.JustHomes;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Set;
 
 public class Commands implements CommandExecutor, TabCompleter {
-    private Main plugin;
+    private JustHomes plugin;
     private String prefix;
 
-    public Commands(Main plugin) {
+    public Commands(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
     }
@@ -35,7 +33,7 @@ public class Commands implements CommandExecutor, TabCompleter {
         }
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(prefix + ChatColor.RED + plugin.messages.get("NotHumanException"));
+            sender.sendMessage(prefix + plugin.messages.get("NotHumanException"));
             return true;
         }
         Player p = (Player) sender;
@@ -74,7 +72,7 @@ public class Commands implements CommandExecutor, TabCompleter {
 
                 ArrayList<String> homes = new ArrayList<String>();
                 if (!(sender instanceof Player)) {
-                    sender.sendMessage(prefix + ChatColor.RED + "You are machine!");
+                    sender.sendMessage(prefix + plugin.messages.get("NotPlayerException"));
                     return homes;
                 }
                 Player p = (Player) sender;

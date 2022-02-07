@@ -2,28 +2,26 @@
 #Polish Language File
 
 #List
-UserHasNoHomes: "Nie zapisałeś jeszcze żadnych lokalizacji!"
+UserHasNoHomes: "&cNie zapisano jeszcze żadnych lokalizacji!"
 ListHomesTitle: "&e&l______________ &r&7Lista twoich domów &e&l______________"
 
 #SetHome
-SetOnlyOnGroundException: "Musisz stać na bloku aby to zrobić!"
-SpecifyHomeNameException: "Musisz nazwać swój dom!"
-CreatedHome: " został stworzony!"
-TooMuchHomesException: "Masz za dużo domów! Spróbuj kilka usunąć."
-UnknownHomeName: "Niewłaściwa nazwa domu!"
-EditedHome: " został poprawiony!"
+SetOnlyOnGroundException: "&cMusisz stać na bloku aby to zrobić!"
+SpecifyHomeNameException: "&cMusisz nazwać swój dom!"
+CreatedHome: "&6%justhomes-homename% &7został stworzony!"
+TooMuchHomesException: "&cMasz za dużo domów! Spróbuj kilka usunąć."
+UnknownHomeName: "&cNiewłaściwa nazwa domu!"
+EditedHome: "&6%justhomes-homename% &7został poprawiony!"
 
 #Teleportation
-Teleporting: "Teleportacja za "
-Seconds: " sekund!"
-DontMove: " Nie ruszaj się!"
-SuccesfullTeleportation: "Zostałeś/aś pomyślnie teleportowany/a do "
-ActionBarNameWhileTeleporting: "Teleportacja..."
-TeleportationCancelled: "Teleportacja Anulowana!"
-UnavailableHome: "Nie można się już przeteleportować do tej lokalizacji!"
+Teleporting: "&7Teleportacja za &6%justhomes-teleportationtime% &7sekund! &cNie ruszaj się!"
+SuccesfullTeleportation: "&7Teleportacja do &6%justhomes-homename%!"
+ActionBarNameWhileTeleporting: "&aTeleportacja..."
+TeleportationCancelled: "&cTeleportacja Anulowana!"
+UnavailableHome: "&cNie można się już przeteleportować do tej lokalizacji!"
 
 #DeleteHome
-DeletedHome: " został pomyślnie usunięty!"
+DeletedHome: "&6%justhomes_homename% &7został usunięty!"
 
 #Other
 NotHumanException: "Nie jesteś graczem!"

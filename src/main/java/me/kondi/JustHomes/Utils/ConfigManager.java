@@ -1,6 +1,6 @@
 package me.kondi.JustHomes.Utils;
 
-import me.kondi.JustHomes.Main;
+import me.kondi.JustHomes.JustHomes;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -16,9 +16,9 @@ public class ConfigManager {
     public YamlConfiguration fileCfg;
     public HashMap<String, String> messages = new HashMap<>();
     public YamlConfiguration messagesCfg;
-    private Main plugin;
+    private JustHomes plugin;
 
-    public ConfigManager(Main plugin) {
+    public ConfigManager(JustHomes plugin) {
         this.plugin = plugin;
 
     }

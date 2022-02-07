@@ -3,47 +3,46 @@ package me.kondi.JustHomes;
 import me.kondi.JustHomes.Commands.*;
 import me.kondi.JustHomes.Data.Database;
 import me.kondi.JustHomes.Data.PlayerData;
+import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.Listeners.Events;
+import me.kondi.JustHomes.Permissions.PermissionChecker;
 import me.kondi.JustHomes.Teleportation.TeleportPlayer;
 import me.kondi.JustHomes.Utils.ConfigManager;
-import me.kondi.JustHomes.Permissions.PermissionChecker;
-import org.bukkit.Bukkit;
+import me.kondi.JustHomes.Utils.Placeholder;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 
-public class Main extends JavaPlugin {
+public class JustHomes extends JavaPlugin {
 
     public FileConfiguration config;
-    public String prefix = ChatColor.GOLD + "JHomes " + ChatColor.GREEN + ">> ";
+    public String prefix = "JHomes >> ";
     public ConfigManager cfgManager = new ConfigManager(this);
     public HashMap<String, String> messages = new HashMap<>();
     public boolean simpleProtection;
     public int homesMaxAmount;
 
     //Classes
-    public Events events ;
+    public Events events;
     public Database db;
-    public PlayerData playerData ;
-    public Commands commands ;
+    public PlayerData playerData;
+    public Commands commands;
     public TeleportPlayer teleportPlayer;
     public PermissionChecker permissionChecker;
-
+    public HomeNames homeNames;
     //Homes commands
     public SetHomeCommand setHome;
-    public HomeCommand homeCommand ;
+    public HomeCommand homeCommand;
     public ListHomeCommand listHome;
     public DeleteHomeCommand deleteHome;
-
-
+    private static JustHomes instance;
 
 
     @Override
     public void onEnable() {
-
+        instance = this;
         setupConfig();
         loadConfig();
         loadClasses();
@@ -66,7 +65,7 @@ public class Main extends JavaPlugin {
 
     }
 
-    public void loadClasses(){
+    public void loadClasses() {
         events = new Events(this);
         playerData = new PlayerData(this);
         commands = new Commands(this);
@@ -77,6 +76,12 @@ public class Main extends JavaPlugin {
         deleteHome = new DeleteHomeCommand(this);
         permissionChecker = new PermissionChecker(this);
         db = new Database(this);
+        homeNames = new HomeNames();
+        new Placeholder().register();
+    }
+
+    public static JustHomes getInstance(){
+        return instance;
     }
 
 
@@ -90,11 +95,6 @@ public class Main extends JavaPlugin {
         getCommand("delhome").setTabCompleter(commands);
         getCommand("loadlanguage").setExecutor(commands);
     }
-
-
-
-
-
 
 
     //Setting up config file

@@ -1,7 +1,7 @@
 package me.kondi.JustHomes.Data;
 
 import me.kondi.JustHomes.Home.Home;
-import me.kondi.JustHomes.Main;
+import me.kondi.JustHomes.JustHomes;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -30,13 +30,13 @@ public class Database {
 
     //Config and plugin objects
     private FileConfiguration config;
-    private Main plugin;
+    private JustHomes plugin;
     private String prefix;
     private ConsoleCommandSender console;
 
 
     //Create database
-    public Database(Main plugin) {
+    public Database(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
         this.config = plugin.config;
