@@ -6,7 +6,6 @@ import me.kondi.JustHomes.Data.PlayerData;
 import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;

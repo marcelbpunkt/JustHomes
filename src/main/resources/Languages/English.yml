@@ -4,6 +4,8 @@
 #List
 UserHasNoHomes: "&cYou don't have any homes!"
 ListHomesTitle: "&e&l______________ &r&7List of your Homes &e&l______________"
+ListColorOfIndexNumber: "&7"
+ListColorOfIndexName: "&6"
 
 #SetHome
 SetOnlyOnGroundException: "&cYou must be on the ground!"

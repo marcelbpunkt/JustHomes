@@ -3,15 +3,13 @@ package me.kondi.JustHomes.Commands;
 import me.kondi.JustHomes.Data.PlayerData;
 import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.JustHomes;
-import me.kondi.JustHomes.Teleportation.TeleportPlayer;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.Set;
+import java.util.List;
 
 
 public class HomeCommand {
@@ -34,18 +32,18 @@ public class HomeCommand {
 
         String uuid = p.getUniqueId().toString();
         if (playerData.countPlayerHomes(uuid) == 0) {
-            p.sendMessage(prefix + ChatColor.RED + messages.get("UserHasNoHomes"));
+            p.sendMessage(prefix + messages.get("UserHasNoHomes"));
             return;
         }
 
         if (args.length == 0) {
-            p.sendMessage(prefix + ChatColor.RED + messages.get("SpecifyHomeNameException"));
+            p.sendMessage(prefix + messages.get("SpecifyHomeNameException"));
             return;
         }
 
 
         String homeName = args[0];
-        Set<String> keys = playerData.listOfHomes(uuid);
+        List<String> keys = playerData.listOfHomes(uuid);
         for (String key : keys) {
             if (homeName.equalsIgnoreCase(key)) {
                 Home home = playerData.getHome(p, homeName);
@@ -58,7 +56,7 @@ public class HomeCommand {
                 return;
             }
         }
-        p.sendMessage(prefix + ChatColor.RED + messages.get("UnknownHomeName"));
+        p.sendMessage(prefix + messages.get("UnknownHomeName"));
 
     }
 

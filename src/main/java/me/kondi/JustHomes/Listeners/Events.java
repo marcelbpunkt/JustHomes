@@ -3,7 +3,6 @@ package me.kondi.JustHomes.Listeners;
 import me.kondi.JustHomes.JustHomes;
 import me.kondi.JustHomes.Teleportation.TeleportPlayer;
 import me.kondi.JustHomes.Utils.ConfigManager;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,13 +47,11 @@ public class Events implements Listener {
                 teleportPlayer.tpCooldownTask.get(uuid).cancel();
                 teleportPlayer.tpCooldownTask.remove(uuid);
                 teleportPlayer.tpCooldown.remove(uuid);
-                e.getPlayer().sendMessage(plugin.prefix + ChatColor.RED + messages.get("TeleportationCancelled"));
+                e.getPlayer().sendMessage(plugin.prefix + messages.get("TeleportationCancelled"));
             }
 
         }
     }
-
-
 
 
 }

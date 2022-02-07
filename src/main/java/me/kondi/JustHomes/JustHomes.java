@@ -46,14 +46,14 @@ public class JustHomes extends JavaPlugin {
         setupConfig();
         loadConfig();
         loadClasses();
-        getServer().getConsoleSender().sendMessage(prefix + ChatColor.GRAY + "Working");
+        getServer().getConsoleSender().sendMessage(prefix + "Working");
         loadCommands();
         getServer().getPluginManager().registerEvents(events, this);
     }
 
     @Override
     public void onDisable() {
-        getServer().getConsoleSender().sendMessage(prefix + ChatColor.GRAY + "Not Working");
+        getServer().getConsoleSender().sendMessage(prefix + "Not Working");
         loadConfig();
         db.stopDatabaseConnection();
 
@@ -80,7 +80,7 @@ public class JustHomes extends JavaPlugin {
         new Placeholder().register();
     }
 
-    public static JustHomes getInstance(){
+    public static JustHomes getInstance() {
         return instance;
     }
 
@@ -89,8 +89,8 @@ public class JustHomes extends JavaPlugin {
     public void loadCommands() {
         getCommand("sethome").setExecutor(commands);
         getCommand("home").setExecutor(commands);
-        getCommand("listhome").setExecutor(commands);
         getCommand("home").setTabCompleter(commands);
+        getCommand("listhome").setExecutor(commands);
         getCommand("delhome").setExecutor(commands);
         getCommand("delhome").setTabCompleter(commands);
         getCommand("loadlanguage").setExecutor(commands);
@@ -102,6 +102,7 @@ public class JustHomes extends JavaPlugin {
         saveDefaultConfig();
         this.config = getConfig();
         saveResource();
+        prefix = config.getString(ChatColor.translateAlternateColorCodes('&', "Prefix"));
         simpleProtection = config.getBoolean("SimpleProtection");
         homesMaxAmount = config.getInt("HomesMaxAmount");
 

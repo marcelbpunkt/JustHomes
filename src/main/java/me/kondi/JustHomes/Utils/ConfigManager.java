@@ -13,10 +13,9 @@ public class ConfigManager {
     public YamlConfiguration folderCfg;
     public File folder;
     public File file;
-    public YamlConfiguration fileCfg;
     public HashMap<String, String> messages = new HashMap<>();
     public YamlConfiguration messagesCfg;
-    private JustHomes plugin;
+    private final JustHomes plugin;
 
     public ConfigManager(JustHomes plugin) {
         this.plugin = plugin;
@@ -44,7 +43,7 @@ public class ConfigManager {
         Set<String> keys = messagesCfg.getConfigurationSection("").getKeys(false);
         messages.clear();
         for (String key : keys) {
-            messages.put(key.toString(), messagesCfg.getString(ChatColor.translateAlternateColorCodes('&',key)));
+            messages.put(key, messagesCfg.getString(ChatColor.translateAlternateColorCodes('&',key)));
         }
         return messages;
 

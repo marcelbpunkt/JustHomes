@@ -4,6 +4,8 @@
 #List
 UserHasNoHomes: "&cNie zapisano jeszcze żadnych lokalizacji!"
 ListHomesTitle: "&e&l______________ &r&7Lista twoich domów &e&l______________"
+ListColorOfIndexNumber: "&7"
+ListColorOfIndexName: "&6"
 
 #SetHome
 SetOnlyOnGroundException: "&cMusisz stać na bloku aby to zrobić!"

@@ -2,15 +2,12 @@ package me.kondi.JustHomes.Data;
 
 import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.JustHomes;
-import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Database {
 
@@ -64,7 +61,7 @@ public class Database {
             getCachedHomesList();
         } catch (Exception ex) {
 
-            console.sendMessage(prefix + "ERROR: " + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
 
         }
 
@@ -109,7 +106,7 @@ public class Database {
 
         } catch (Exception ex) {
 
-            console.sendMessage(prefix + "ERROR:" + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR:" + ex);
 
         }
 
@@ -130,7 +127,7 @@ public class Database {
 
         } catch (Exception ex) {
 
-            console.sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
 
         }
         return 0;
@@ -169,7 +166,7 @@ public class Database {
 
                 } catch (Exception ex) {
 
-                    console.sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+                    console.sendMessage(prefix + "ERROR: " + ex);
 
                 }
             }
@@ -180,7 +177,7 @@ public class Database {
 
 
     //Get homes to list
-    public Set<String> getHomesList(String uuid) throws SQLException {
+    public List<String> getHomesList(String uuid) throws SQLException {
         try {
 
 
@@ -188,7 +185,7 @@ public class Database {
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, uuid);
             ResultSet results = preparedStmt.executeQuery();
-            Set<String> listOfHomes = new HashSet<>();
+            List<String> listOfHomes = new ArrayList<>();
             while (results.next()) {
                 listOfHomes.add(results.getString("HomeName"));
             }
@@ -199,7 +196,7 @@ public class Database {
 
         } catch (Exception ex) {
 
-            console.sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
 
         }
         return null;
@@ -230,7 +227,7 @@ public class Database {
 
         } catch (Exception ex) {
 
-            console.sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
 
         }
         return null;
@@ -250,7 +247,7 @@ public class Database {
 
 
         } catch (Exception ex) {
-            console.sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
 
         }
     }
@@ -275,14 +272,14 @@ public class Database {
                         "PRIMARY KEY (UUID, HomeName))";
 
                 st.executeUpdate(playerDataTable);
-                console.sendMessage(prefix + ChatColor.GREEN + "Table [HOMES] Created!");
+                console.sendMessage(prefix + "Table [HOMES] Created!");
                 break;
             }
 
 
         } catch (Exception ex) {
 
-            console.sendMessage(prefix + "ERROR: " + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
         }
     }
 

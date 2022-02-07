@@ -2,21 +2,23 @@ package me.kondi.JustHomes.Data;
 
 import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.JustHomes;
-import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 public class PlayerData {
 
-    private JustHomes plugin;
-    private ConsoleCommandSender console;
+    private final JustHomes plugin;
+    private final ConsoleCommandSender console;
+    private final String prefix;
 
     public PlayerData(JustHomes plugin) {
         this.plugin = plugin;
         this.console = plugin.getServer().getConsoleSender();
+        this.prefix = plugin.prefix;
     }
 
     public int countPlayerHomes(String uuid) {
@@ -26,7 +28,7 @@ public class PlayerData {
             return plugin.db.getHomesAmount(uuid);
         } catch (SQLException ex) {
             ex.printStackTrace();
-            plugin.getServer().getConsoleSender().sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
         }
         return 0;
 
@@ -34,13 +36,13 @@ public class PlayerData {
     }
 
 
-    public Set<String> listOfHomes(String uuid) {
+    public List<String> listOfHomes(String uuid) {
 
         try {
             return plugin.db.getHomesList(uuid);
         } catch (SQLException ex) {
             ex.printStackTrace();
-            console.sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
         }
         return null;
     }
@@ -54,7 +56,7 @@ public class PlayerData {
         try {
             plugin.db.setHome(home);
         } catch (SQLException ex) {
-            console.sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
         }
 
 
@@ -65,7 +67,7 @@ public class PlayerData {
         String uuid = p.getUniqueId().toString();
         int homesMaxAmount = plugin.permissionChecker.checkHomesMaxAmount(p);
         boolean foundHome = false;
-        Set<String> keys = listOfHomes(uuid);
+        List<String> keys = listOfHomes(uuid);
         if (keys.size() > homesMaxAmount) {
             for (int i = 0; i < homesMaxAmount; i++) {
                 if (homeName.equalsIgnoreCase(keys.toArray()[i].toString()))
@@ -79,10 +81,10 @@ public class PlayerData {
                 return plugin.db.getHome(uuid, homeName);
             } catch (SQLException ex) {
 
-                console.sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+                console.sendMessage(prefix + "ERROR: " + ex);
             }
         } else {
-            p.sendMessage(plugin.prefix + ChatColor.RED + plugin.messages.get("UnavailableHome"));
+            p.sendMessage(prefix + plugin.messages.get("UnavailableHome"));
         }
 
 
@@ -95,7 +97,7 @@ public class PlayerData {
             plugin.db.deleteHome(uuid, homeName);
         } catch (SQLException ex) {
             ex.printStackTrace();
-            console.sendMessage("[JHomes] ERROR:" + ChatColor.RED + ex);
+            console.sendMessage(prefix + "ERROR: " + ex);
         }
 
 

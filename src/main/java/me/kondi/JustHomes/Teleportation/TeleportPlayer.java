@@ -2,7 +2,6 @@ package me.kondi.JustHomes.Teleportation;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.kondi.JustHomes.JustHomes;
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
@@ -16,7 +15,7 @@ public class TeleportPlayer {
     public static HashMap<String, BukkitRunnable> tpCooldownTask = new HashMap<>();
     private final JustHomes plugin;
     private String prefix;
-    private HashMap<String, String> messages = new HashMap<>();
+    private HashMap<String, String> messages;
 
     public TeleportPlayer(JustHomes plugin) {
         this.plugin = plugin;
@@ -45,7 +44,7 @@ public class TeleportPlayer {
 
                 if (tpCooldown.get(uuid) == 0) {
                     p.teleport(loc);
-                    p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p,messages.get("SuccesfullTeleportation")));
+                    p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("SuccesfullTeleportation")));
                     tpCooldownTask.get(uuid).cancel();
                     tpCooldown.remove(uuid);
                     tpCooldownTask.remove(uuid);
