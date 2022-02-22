@@ -2,6 +2,8 @@ package me.kondi.JustHomes.Commands;
 
 
 import me.kondi.JustHomes.JustHomes;
+import org.bukkit.Material;
+import org.bukkit.block.data.type.Light;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +31,6 @@ public class Commands implements CommandExecutor, TabCompleter {
                 plugin.saveResource();
                 return true;
             }
-
         }
 
         if (!(sender instanceof Player p)) {

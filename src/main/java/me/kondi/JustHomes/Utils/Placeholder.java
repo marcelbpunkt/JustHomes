@@ -9,20 +9,30 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Placeholder extends PlaceholderExpansion {
-public static JustHomes plugin = JustHomes.getInstance();
+
     @Override
     public @NotNull String getIdentifier() {
-        return null;
+        return "justhomes";
     }
 
     @Override
     public @NotNull String getAuthor() {
-        return null;
+        return "kondi";
     }
 
     @Override
     public @NotNull String getVersion() {
-        return null;
+        return "1.18.1";
+    }
+
+    @Override
+    public boolean canRegister() {
+        return true;
+    }
+
+    @Override
+    public boolean persist() {
+        return true;
     }
 
     @Override

@@ -10,14 +10,14 @@ ListColorOfIndexName: "&6"
 #SetHome
 SetOnlyOnGroundException: "&cMusisz stać na bloku aby to zrobić!"
 SpecifyHomeNameException: "&cMusisz nazwać swój dom!"
-CreatedHome: "&6%justhomes-homename% &7został stworzony!"
+CreatedHome: "&6%justhomes_homename% &7został stworzony!"
 TooMuchHomesException: "&cMasz za dużo domów! Spróbuj kilka usunąć."
 UnknownHomeName: "&cNiewłaściwa nazwa domu!"
-EditedHome: "&6%justhomes-homename% &7został poprawiony!"
+EditedHome: "&6%justhomes_homename% &7został poprawiony!"
 
 #Teleportation
-Teleporting: "&7Teleportacja za &6%justhomes-teleportationtime% &7sekund! &cNie ruszaj się!"
-SuccesfullTeleportation: "&7Teleportacja do &6%justhomes-homename%!"
+Teleporting: "&7Teleportacja za &6%justhomes_teleportationtime% &7sekund! &cNie ruszaj się!"
+SuccesfullTeleportation: "&7Teleportacja do &6%justhomes_homename%!"
 ActionBarNameWhileTeleporting: "&aTeleportacja..."
 TeleportationCancelled: "&cTeleportacja Anulowana!"
 UnavailableHome: "&cNie można się już przeteleportować do tej lokalizacji!"
