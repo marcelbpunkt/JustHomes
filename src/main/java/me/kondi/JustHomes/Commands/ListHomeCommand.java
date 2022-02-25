@@ -2,7 +2,17 @@ package me.kondi.JustHomes.Commands;
 
 
 import me.kondi.JustHomes.Data.PlayerData;
+import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.JustHomes;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Entity;
+import net.md_5.bungee.api.chat.hover.content.Text;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -29,7 +39,7 @@ public class ListHomeCommand {
             return;
         }
 
-        List<String> keys = playerData.listOfHomes(uuid);
+        List<Home> keys = playerData.listOfHomesWithDetails(uuid);
         int maxHomesAmount = plugin.permissionChecker.checkHomesMaxAmount(p);
         if (keys.size() < maxHomesAmount) maxHomesAmount = keys.size();
 
@@ -37,10 +47,21 @@ public class ListHomeCommand {
             p.sendMessage(prefix + messages.get("UserHasNoHomes"));
             return;
         }
+
+
         p.sendMessage(messages.get("ListHomesTitle"));
 
         for (int i = 1; i < maxHomesAmount + 1; i++) {
-            p.sendMessage(messages.get("ListColorOfIndexNumber") + i + ". " + messages.get("ListColorOfIndexName") + keys.get(i - 1));
+            Home home = keys.get(i-1);
+            TextComponent indexText = new TextComponent(messages.get("ListColorOfIndexNumber") + i + ". " );
+            TextComponent homeText = new TextComponent(messages.get("ListColorOfIndexName") + home.getHomeName());
+            homeText.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( "World= " + Bukkit.getWorld(home.getWorldName()).getEnvironment().name() +"\n"+
+                    "X= " + (int) home.getX() +"\n"+
+                    "Y= " + (int) home.getY() +"\n"+
+                    "Z= " + (int) home.getZ()
+                    )));
+            indexText.addExtra(homeText);
+            p.spigot().sendMessage(indexText);
         }
 
 

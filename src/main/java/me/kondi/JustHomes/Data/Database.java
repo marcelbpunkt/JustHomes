@@ -202,6 +202,37 @@ public class Database {
         return null;
     }
 
+    //Get homes to list with details
+    public List<Home> getHomesListWithDetails(String uuid) throws SQLException {
+        try {
+
+
+            String query = "SELECT HomeName, WorldName, X, Y, Z FROM HOMES WHERE UUID=?";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, uuid);
+            ResultSet results = preparedStmt.executeQuery();
+            List<Home> listOfHomes = new ArrayList<>();
+            while (results.next()) {
+                Home home = new Home(results.getString("HomeName"),
+                        results.getString("WorldName"),
+                        results.getDouble("X"),
+                        results.getDouble("Y"),
+                        results.getDouble("Z"));
+                listOfHomes.add(home);
+            }
+
+
+            return listOfHomes;
+
+
+        } catch (Exception ex) {
+
+            console.sendMessage(prefix + "ERROR: " + ex);
+
+        }
+        return null;
+    }
+
 
     //Get Home
     public Home getHome(String uuid, String homeName) throws SQLException {
@@ -244,7 +275,7 @@ public class Database {
             preparedStmt.setString(1, uuid);
             preparedStmt.setString(2, homeName);
             preparedStmt.execute();
-
+            CachedListOfHomes.get(uuid).remove(homeName);
 
         } catch (Exception ex) {
             console.sendMessage(prefix + "ERROR: " + ex);

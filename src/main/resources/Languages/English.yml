@@ -3,7 +3,7 @@
 
 #List
 UserHasNoHomes: "&cYou don't have any homes!"
-ListHomesTitle: "&e&l______________ &r&7List of your Homes &e&l______________"
+ListHomesTitle: "&e&l______________ &r&fList of your Homes &e&l______________"
 ListColorOfIndexNumber: "&7"
 ListColorOfIndexName: "&6"
 
@@ -17,7 +17,7 @@ EditedHome: "%justhomes_homename% has been edited!"
 
 #Teleportation
 Teleporting: "Teleporting in %justhomes_teleportationtime% seconds! &cDont move!"
-SuccesfullTeleportation: "You were succesfully teleported to &%justhomes_homename%!"
+SuccesfullTeleportation: "You were succesfully teleported to &%justhomes_homename%"
 ActionBarNameWhileTeleporting: "Teleporting..."
 TeleportationCancelled: "Teleportation Cancelled!"
 UnavailableHome: "That home is no longer available!"

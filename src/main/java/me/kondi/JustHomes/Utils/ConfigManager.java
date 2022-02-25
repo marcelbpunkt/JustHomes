@@ -43,7 +43,7 @@ public class ConfigManager {
         Set<String> keys = messagesCfg.getConfigurationSection("").getKeys(false);
         messages.clear();
         for (String key : keys) {
-            messages.put(key, messagesCfg.getString(ChatColor.translateAlternateColorCodes('&',key)));
+            messages.put(key, ChatColor.translateAlternateColorCodes('&',messagesCfg.getString(key)));
         }
         return messages;
 

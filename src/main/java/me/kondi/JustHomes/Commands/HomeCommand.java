@@ -2,6 +2,7 @@ package me.kondi.JustHomes.Commands;
 
 import me.kondi.JustHomes.Data.PlayerData;
 import me.kondi.JustHomes.Home.Home;
+import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -51,7 +52,7 @@ public class HomeCommand {
                 Location loc = new Location(world, home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch());
 
                 int duration = plugin.config.getInt("DelayInTeleport");
-
+                HomeNames.addHomeName(uuid, homeName);
                 plugin.teleportPlayer.teleportPlayer(p, loc, duration, homeName);
                 return;
             }

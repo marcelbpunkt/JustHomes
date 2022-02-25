@@ -47,6 +47,17 @@ public class PlayerData {
         return null;
     }
 
+    public List<Home> listOfHomesWithDetails(String uuid) {
+
+        try {
+            return plugin.db.getHomesListWithDetails(uuid);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            console.sendMessage(prefix + "ERROR: " + ex);
+        }
+        return null;
+    }
+
     public Set<String> listOfHomesToTabCompleter(String uuid) {
         return plugin.db.getCachedListOfHomes(uuid);
     }

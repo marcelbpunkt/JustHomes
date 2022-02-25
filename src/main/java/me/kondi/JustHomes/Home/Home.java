@@ -22,6 +22,14 @@ public class Home {
         this.pitch = pitch;
         this.yaw = yaw;
     }
+    public Home(String homeName, String worldName, double x, double y, double z) {
+        this.homeName = homeName;
+        this.worldName = worldName;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
 
 
     public String getOwner() {

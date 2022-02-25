@@ -25,10 +25,11 @@ public class TeleportPlayer {
 
 
     public void teleportPlayer(Player p, Location loc, int duration, String name) {
-
-        p.sendMessage(prefix + messages.get("Teleporting"));
         String uuid = p.getUniqueId().toString();
         tpCooldown.put(uuid, duration);
+        p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("Teleporting")));
+
+
         tpCooldownTask.put(uuid, new BukkitRunnable() {
             public void run() {
                 if (tpCooldown.get(uuid) > 0) {
