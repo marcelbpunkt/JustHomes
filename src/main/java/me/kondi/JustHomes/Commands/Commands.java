@@ -1,6 +1,7 @@
 package me.kondi.JustHomes.Commands;
 
 
+import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.JustHomes;
 import org.bukkit.Material;
 import org.bukkit.block.data.type.Light;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class Commands implements CommandExecutor, TabCompleter {
@@ -26,7 +28,7 @@ public class Commands implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command cmd, @NotNull String arg2, String[] args) {
 
-        if (cmd.getName().equalsIgnoreCase("loadlanguage")) {
+        if (cmd.getName().equalsIgnoreCase("reloadlanguage")) {
             if (sender.isOp() || sender.hasPermission("justhomes.loadlanguage")) {
                 plugin.saveResource();
                 return true;
@@ -79,12 +81,12 @@ public class Commands implements CommandExecutor, TabCompleter {
                 }
 
 
-                Set<String> keys = plugin.playerData.listOfHomesToTabCompleter(uuid);
+                List<Home> keys = plugin.playerData.listOfHomes(uuid);
                 int homesMaxAmount = plugin.permissionChecker.checkHomesMaxAmount(p);
                 if (keys.size() < homesMaxAmount) homesMaxAmount = keys.size();
                 for (int i = 0; i < homesMaxAmount; i++) {
-                    if (keys.toArray(new String[homesMaxAmount])[i].startsWith(args[0].toLowerCase())) {
-                        homes.add(keys.toArray(new String[homesMaxAmount])[i]);
+                    if (keys.get(i).getHomeName().startsWith(args[0].toLowerCase())) {
+                        homes.add(keys.get(i).getHomeName());
                     }
 
                 }

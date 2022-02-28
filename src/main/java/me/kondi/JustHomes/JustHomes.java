@@ -66,8 +66,9 @@ public class JustHomes extends JavaPlugin {
     }
 
     public void loadClasses() {
-        events = new Events(this);
+        db = new Database(this);
         playerData = new PlayerData(this);
+        events = new Events(this);
         commands = new Commands(this);
         teleportPlayer = new TeleportPlayer(this);
         setHome = new SetHomeCommand(this);
@@ -75,7 +76,7 @@ public class JustHomes extends JavaPlugin {
         listHome = new ListHomeCommand(this);
         deleteHome = new DeleteHomeCommand(this);
         permissionChecker = new PermissionChecker(this);
-        db = new Database(this);
+
         homeNames = new HomeNames();
         new Placeholder().register();
     }
@@ -93,7 +94,7 @@ public class JustHomes extends JavaPlugin {
         getCommand("listhome").setExecutor(commands);
         getCommand("delhome").setExecutor(commands);
         getCommand("delhome").setTabCompleter(commands);
-        getCommand("loadlanguage").setExecutor(commands);
+        getCommand("reloadlanguage").setExecutor(commands);
     }
 
 

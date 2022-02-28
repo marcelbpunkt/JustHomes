@@ -44,10 +44,10 @@ public class HomeCommand {
 
 
         String homeName = args[0];
-        List<String> keys = playerData.listOfHomes(uuid);
-        for (String key : keys) {
-            if (homeName.equalsIgnoreCase(key)) {
-                Home home = playerData.getHome(p, homeName);
+        List<Home> keys = playerData.listOfHomes(uuid);
+
+        for (Home home : keys) {
+            if (homeName.equalsIgnoreCase(home.getHomeName())) {
                 World world = Bukkit.getWorld(home.getWorldName());
                 Location loc = new Location(world, home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch());
 

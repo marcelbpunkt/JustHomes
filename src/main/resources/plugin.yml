@@ -1,5 +1,5 @@
 name: JustHomes
-version: 1.18
+version: 1.18.1
 description: Homes plugin, create home and enjoy.
 api-version: 1.18
 author: Kondee
@@ -22,8 +22,8 @@ commands:
     description: Deletes your home.
     usage: /<command> <homename>
     aliases: dh
-  loadlanguage:
-    description: Reload languages.
+  reloadlanguage:
+    description: Reloads languages.
     usage: /<command>
 
 permissions:
@@ -39,7 +39,7 @@ permissions:
   justhomes.delhome:
     description: Allows you to delete your homes.
     default: true
-  justhomes.loadlanguage:
+  justhomes.reloadlanguage:
     description: Allows you to fast reload language.
     default: op
 

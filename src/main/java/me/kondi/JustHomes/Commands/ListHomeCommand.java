@@ -39,7 +39,7 @@ public class ListHomeCommand {
             return;
         }
 
-        List<Home> keys = playerData.listOfHomesWithDetails(uuid);
+        List<Home> keys = playerData.listOfHomes(uuid);
         int maxHomesAmount = plugin.permissionChecker.checkHomesMaxAmount(p);
         if (keys.size() < maxHomesAmount) maxHomesAmount = keys.size();
 

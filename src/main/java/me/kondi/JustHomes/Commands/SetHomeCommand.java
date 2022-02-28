@@ -62,8 +62,8 @@ public class SetHomeCommand {
         } else {
 
 
-            for (String homes : playerData.listOfHomes(uuid)) {
-                if (homes.equals(args[0])) {
+            for (Home home : playerData.listOfHomes(uuid)) {
+                if (home.getHomeName().equals(args[0])) {
                     saveLoc(p, args[0]);
                     p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("EditedHome")));
                     return;
@@ -89,7 +89,7 @@ public class SetHomeCommand {
         String uuid = p.getUniqueId().toString();
         HomeNames.addHomeName(uuid, homeName);
         Home home = new Home(uuid, homeName, p.getLocation().getWorld().getName(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getPitch(), p.getLocation().getYaw());
-        playerData.saveHome(home);
+        playerData.addHome(home);
     }
 
 }

@@ -2,12 +2,14 @@ package me.kondi.JustHomes.Commands;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.kondi.JustHomes.Data.PlayerData;
+import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class DeleteHomeCommand {
 
@@ -34,9 +36,12 @@ public class DeleteHomeCommand {
             return;
         }
         String homeName = args[0];
-        List<String> homeList = playerData.listOfHomes(uuid);
-        if (homeList.contains(homeName)) {
-            homeName = homeList.get(homeList.indexOf(homeName));
+        final String homeNameToStream = homeName;
+        List<Home> homeList = playerData.listOfHomes(uuid);
+        Optional<Home> newHome =  homeList.stream().filter(home -> home.getHomeName().equalsIgnoreCase(homeNameToStream)).findFirst();
+
+        if (newHome.isPresent()) {
+            homeName = newHome.get().getHomeName();
             HomeNames.addHomeName(uuid, homeName);
             playerData.deleteHome(uuid, homeName);
             p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("DeletedHome")));

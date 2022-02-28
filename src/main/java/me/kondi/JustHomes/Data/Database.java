@@ -13,7 +13,7 @@ public class Database {
 
 
     //Cache
-    private HashMap<String, Set<String>> CachedListOfHomes = new HashMap<>();
+    private HashMap<String, List<Home>> CachedHomes = new HashMap<>();
     private BukkitScheduler scheduler;
 
     //Database objects and connection data
@@ -58,13 +58,23 @@ public class Database {
 
             st = con.createStatement();
             createTable();
-            getCachedHomesList();
+
         } catch (Exception ex) {
 
             console.sendMessage(prefix + "ERROR: " + ex);
 
         }
 
+    }
+
+    public void saveHomes(String uuid){
+        CachedHomes.get(uuid).forEach(home -> {
+            try {
+                setHome(home);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     //Save home
@@ -114,155 +124,17 @@ public class Database {
 
     //Get homes amount
     public int getHomesAmount(String uuid) throws SQLException {
-        try {
-
-
-            String query = "SELECT COUNT(UUID) AS 'rowcount' FROM HOMES WHERE UUID=?";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1, uuid);
-            ResultSet results = preparedStmt.executeQuery();
-            while (results.next())
-                return results.getInt("rowcount");
-
-
-        } catch (Exception ex) {
-
-            console.sendMessage(prefix + "ERROR: " + ex);
-
-        }
-        return 0;
+        return CachedHomes.get(uuid).size();
     }
 
     //Get cached home list
-    public Set<String> getCachedListOfHomes(String uuid) {
-        return CachedListOfHomes.get(uuid);
+    public List<Home> getCachedListOfHomes(String uuid) {
+        return CachedHomes.get(uuid);
     }
-
-    //Get homes list to cache - tabCompleter
-    public void getCachedHomesList() {
-        scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
-            @Override
-            public void run() {
-                try {
-
-
-                    String query = "SELECT HomeName, UUID FROM HOMES";
-                    PreparedStatement preparedStmt = con.prepareStatement(query);
-                    ResultSet results = preparedStmt.executeQuery();
-                    Set<String> listOfHomes = new HashSet<>();
-                    while (results.next()) {
-                        String uuid = results.getString("UUID");
-                        if (!CachedListOfHomes.containsKey(uuid)) {
-                            listOfHomes.add(results.getString("HomeName"));
-                            CachedListOfHomes.put(uuid, listOfHomes);
-
-                        } else {
-                            if (!CachedListOfHomes.get(uuid).contains(results.getString("HomeName")))
-                                CachedListOfHomes.get(uuid).add(results.getString("HomeName"));
-
-                        }
-                    }
-
-
-                } catch (Exception ex) {
-
-                    console.sendMessage(prefix + "ERROR: " + ex);
-
-                }
-            }
-        }, 0, 20);
-
-
-    }
-
-
-    //Get homes to list
-    public List<String> getHomesList(String uuid) throws SQLException {
-        try {
-
-
-            String query = "SELECT HomeName FROM HOMES WHERE UUID=?";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1, uuid);
-            ResultSet results = preparedStmt.executeQuery();
-            List<String> listOfHomes = new ArrayList<>();
-            while (results.next()) {
-                listOfHomes.add(results.getString("HomeName"));
-            }
-
-
-            return listOfHomes;
-
-
-        } catch (Exception ex) {
-
-            console.sendMessage(prefix + "ERROR: " + ex);
-
-        }
-        return null;
-    }
-
-    //Get homes to list with details
-    public List<Home> getHomesListWithDetails(String uuid) throws SQLException {
-        try {
-
-
-            String query = "SELECT HomeName, WorldName, X, Y, Z FROM HOMES WHERE UUID=?";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1, uuid);
-            ResultSet results = preparedStmt.executeQuery();
-            List<Home> listOfHomes = new ArrayList<>();
-            while (results.next()) {
-                Home home = new Home(results.getString("HomeName"),
-                        results.getString("WorldName"),
-                        results.getDouble("X"),
-                        results.getDouble("Y"),
-                        results.getDouble("Z"));
-                listOfHomes.add(home);
-            }
-
-
-            return listOfHomes;
-
-
-        } catch (Exception ex) {
-
-            console.sendMessage(prefix + "ERROR: " + ex);
-
-        }
-        return null;
-    }
-
 
     //Get Home
     public Home getHome(String uuid, String homeName) throws SQLException {
-        try {
-
-
-            String query = "SELECT WorldName, X, Y, Z, Pitch, Yaw FROM HOMES WHERE UUID=? AND HomeName = ?";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1, uuid);
-            preparedStmt.setString(2, homeName);
-            ResultSet results = preparedStmt.executeQuery();
-            while (results.next()) {
-                Home home = new Home(uuid, homeName, results.getString("WorldName"),
-                        results.getDouble("X"),
-                        results.getDouble("Y"),
-                        results.getDouble("z"),
-                        results.getFloat("Pitch"),
-                        results.getFloat("Yaw"));
-
-                return home;
-            }
-
-
-        } catch (Exception ex) {
-
-            console.sendMessage(prefix + "ERROR: " + ex);
-
-        }
-        return null;
-
+        return CachedHomes.get(uuid).stream().filter(h -> h.getHomeName().equalsIgnoreCase(homeName)).findFirst().get();
     }
 
 
@@ -270,19 +142,13 @@ public class Database {
     public void deleteHome(String uuid, String homeName) throws SQLException {
         try {
 
-            String query = "DELETE FROM HOMES WHERE UUID=? AND HomeName = ?";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1, uuid);
-            preparedStmt.setString(2, homeName);
-            preparedStmt.execute();
-            CachedListOfHomes.get(uuid).remove(homeName);
-
+            Home home = CachedHomes.get(uuid).stream().filter(h -> h.getHomeName().equalsIgnoreCase(homeName)).findFirst().get();
+            CachedHomes.get(uuid).remove(home);
         } catch (Exception ex) {
             console.sendMessage(prefix + "ERROR: " + ex);
 
         }
     }
-
 
     //Create table
     public void createTable() {
@@ -325,5 +191,43 @@ public class Database {
         }
     }
 
+
+    public void loadPlayerData(String uuid) {
+        try {
+
+
+            String query = "SELECT HomeName, WorldName, X, Y, Z, Pitch, Yaw FROM HOMES WHERE UUID=?";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, uuid);
+            ResultSet results = preparedStmt.executeQuery();
+            List<Home> listOfHomes = new ArrayList<>();
+
+            while (results.next()) {
+                Home home = new Home(uuid,
+                        results.getString("HomeName"),
+                        results.getString("WorldName"),
+                        results.getDouble("X"),
+                        results.getDouble("Y"),
+                        results.getDouble("Z"),
+                        results.getFloat("Pitch"),
+                        results.getFloat("Yaw"));
+                listOfHomes.add(home);
+            }
+
+            CachedHomes.put(uuid, listOfHomes);
+
+        } catch (Exception ex) {
+
+            console.sendMessage(prefix + "ERROR: " + ex);
+
+        }
+
+    }
+
+    public void addHomeToCache(Home home) {
+        List<Home> newHomeList = CachedHomes.get(home.getOwner());
+        newHomeList.add(home);
+        CachedHomes.put(home.getOwner(), newHomeList);
+    }
 
 }
