@@ -14,7 +14,6 @@ public class Database {
 
     //Cache
     private HashMap<String, List<Home>> CachedHomes = new HashMap<>();
-    private BukkitScheduler scheduler;
 
     //Database objects and connection data
     private Connection con;
@@ -40,7 +39,6 @@ public class Database {
         this.databaseType = config.getString("DatabaseType");
         this.console = plugin.getServer().getConsoleSender();
 
-        this.scheduler = plugin.getServer().getScheduler();
         try {
             if (databaseType.equalsIgnoreCase("MYSQL")) {
                 this.host = config.getString("Host");
@@ -183,7 +181,6 @@ public class Database {
     //Stops database connection and schedulers
 
     public void stopDatabaseConnection() {
-        scheduler.cancelTasks(plugin);
         try {
             con.close();
         } catch (SQLException e) {
