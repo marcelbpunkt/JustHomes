@@ -32,17 +32,16 @@ public class JustHomes extends JavaPlugin {
     public TeleportPlayer teleportPlayer;
     public PermissionChecker permissionChecker;
     public HomeNames homeNames;
-    //Homes commands
+    //Home commands
     public SetHomeCommand setHome;
     public HomeCommand homeCommand;
     public ListHomeCommand listHome;
     public DeleteHomeCommand deleteHome;
-    private static JustHomes instance;
 
 
     @Override
     public void onEnable() {
-        instance = this;
+
         setupConfig();
         loadConfig();
         loadClasses();
@@ -81,13 +80,10 @@ public class JustHomes extends JavaPlugin {
         new Placeholder().register();
     }
 
-    public static JustHomes getInstance() {
-        return instance;
-    }
-
 
     //Load all commands
     public void loadCommands() {
+
         getCommand("sethome").setExecutor(commands);
         getCommand("home").setExecutor(commands);
         getCommand("home").setTabCompleter(commands);
@@ -118,4 +114,5 @@ public class JustHomes extends JavaPlugin {
         this.messages = cfgManager.loadLanguage(lang);
 
     }
+
 }
