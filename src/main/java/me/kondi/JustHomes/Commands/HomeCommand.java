@@ -6,18 +6,16 @@ import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.List;
 
 
 public class HomeCommand {
 
     private final JustHomes plugin;
-    private String prefix;
-    private HashMap<String, String> messages = new HashMap<>();
+    private final String prefix;
+    private HashMap<String, String> messages;
     private PlayerData playerData;
 
     public HomeCommand(JustHomes plugin) {
@@ -29,7 +27,6 @@ public class HomeCommand {
 
 
     public void get(Player p, String[] args) {
-
 
         String uuid = p.getUniqueId().toString();
         if (playerData.countPlayerHomes(uuid) == 0) {
@@ -44,25 +41,26 @@ public class HomeCommand {
 
 
         String homeName = args[0];
-        List<Home> keys = playerData.listOfHomes(uuid);
+        Home home = playerData.getHome(uuid, homeName);
 
-        for (Home home : keys) {
-            if (homeName.equalsIgnoreCase(home.getHomeName())) {
-                World world = Bukkit.getWorld(home.getWorldName());
-                Location loc = new Location(world, home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch());
-
-                int duration = plugin.config.getInt("DelayInTeleport");
-                HomeNames.addHomeName(uuid, homeName);
-                plugin.teleportPlayer.teleportPlayer(p, loc, duration, homeName);
-                return;
-            }
+        if (home == null) {
+            p.sendMessage(prefix + messages.get("UnknownHomeName"));
+            return;
         }
-        p.sendMessage(prefix + messages.get("UnknownHomeName"));
+
+        Location loc = new Location(Bukkit.getWorld(home.getWorldName()), home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch());
+        int duration = plugin.config.getInt("DelayInTeleport");
+        HomeNames.addHomeName(uuid, homeName);
+        plugin.teleportPlayer.teleportPlayer(p, loc, duration, homeName);
+
 
     }
 
 
 }
+
+
+
 
 
 

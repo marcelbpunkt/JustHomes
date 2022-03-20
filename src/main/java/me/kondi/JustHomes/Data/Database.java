@@ -132,21 +132,29 @@ public class Database {
 
     //Get Home
     public Home getHome(String uuid, String homeName) throws SQLException {
-        return CachedHomes.get(uuid).stream().filter(h -> h.getHomeName().equalsIgnoreCase(homeName)).findFirst().get();
+        Optional<Home> home = CachedHomes.get(uuid).stream().filter(h -> h.getHomeName().equalsIgnoreCase(homeName)).findFirst();
+        return home.orElse(null);
     }
 
 
     //Delete Home
-    public void deleteHome(String uuid, String homeName) throws SQLException {
+    public void deleteHome(Home home) throws SQLException {
         try {
+            CachedHomes.get(home.getOwner()).remove(home);
 
-            Home home = CachedHomes.get(uuid).stream().filter(h -> h.getHomeName().equalsIgnoreCase(homeName)).findFirst().get();
-            CachedHomes.get(uuid).remove(home);
+            String query = "DELETE FROM HOMES WHERE UUID = ? AND HomeName = ?";
+            PreparedStatement preparedStmtInsert = con.prepareStatement(query);
+            preparedStmtInsert.setString(1, home.getOwner());
+            preparedStmtInsert.setString(2, home.getHomeName());
+            preparedStmtInsert.execute();
+
         } catch (Exception ex) {
             console.sendMessage(prefix + "ERROR: " + ex);
 
         }
     }
+
+
 
     //Create table
     public void createTable() {
@@ -222,9 +230,15 @@ public class Database {
     }
 
     public void addHomeToCache(Home home) {
-        List<Home> newHomeList = CachedHomes.get(home.getOwner());
-        newHomeList.add(home);
-        CachedHomes.put(home.getOwner(), newHomeList);
+
+        CachedHomes.get(home.getOwner()).add(home);
+
+    }
+
+    public void replaceHomeInCache(Home home, Home newHome){
+        List<Home> homeList = CachedHomes.get(home.getOwner());
+        homeList.set(homeList.indexOf(home), newHome);
+        CachedHomes.replace(home.getOwner(), homeList );
     }
 
 }

@@ -7,7 +7,6 @@ import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
 import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -37,7 +36,6 @@ public class SetHomeCommand {
     public void set(Player p, String[] args) {
 
         String uuid = p.getUniqueId().toString();
-        Material mat = p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType();
 
         if (plugin.simpleProtection) {
             Material middle = p.getLocation().getBlock().getType();
@@ -46,42 +44,34 @@ public class SetHomeCommand {
                 p.sendMessage(prefix + messages.get("SetOnlyOnGroundException"));
                 return;
             }
-
         }
-
 
         if (args.length == 0) {
             p.sendMessage(prefix + messages.get("SpecifyHomeNameException"));
             return;
         }
-        int playerHomes = playerData.countPlayerHomes(uuid);
-        if (playerHomes == 0) {
 
+        List<Home> playerHomes = playerData.listOfHomes(uuid);
+
+        if (playerHomes.size() == 0) {
             saveLoc(p, args[0]);
             p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("CreatedHome")));
         } else {
 
-
-            for (Home home : playerData.listOfHomes(uuid)) {
-                if (home.getHomeName().equals(args[0])) {
-                    saveLoc(p, args[0]);
-                    p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("EditedHome")));
-                    return;
-                }
+            Home home = playerData.getHome(uuid, args[0]);
+            if (home != null) {
+                replaceLoc(p, home);
+                p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("EditedHome")));
+                return;
             }
-            if (playerHomes >= plugin.permissionChecker.checkHomesMaxAmount(p)) {
+            if (playerHomes.size() >= plugin.permissionChecker.checkHomesMaxAmount(p)) {
                 p.sendMessage(prefix + messages.get("TooMuchHomesException"));
                 return;
             }
 
-
             saveLoc(p, args[0]);
             p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("CreatedHome")));
-
-
         }
-
-
     }
 
 
@@ -90,6 +80,13 @@ public class SetHomeCommand {
         HomeNames.addHomeName(uuid, homeName);
         Home home = new Home(uuid, homeName, p.getLocation().getWorld().getName(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getPitch(), p.getLocation().getYaw());
         playerData.addHome(home);
+    }
+
+    public void replaceLoc(Player p, Home home) {
+        String uuid = p.getUniqueId().toString();
+        HomeNames.addHomeName(uuid, home.getHomeName());
+        Home newHome = new Home(uuid, home.getHomeName(), p.getLocation().getWorld().getName(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getPitch(), p.getLocation().getYaw());
+        playerData.replaceHome(home, newHome);
     }
 
 }

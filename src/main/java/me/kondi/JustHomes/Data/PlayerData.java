@@ -34,13 +34,23 @@ public class PlayerData {
         return db.getCachedListOfHomes(uuid);
     }
 
+    public Home getHome(String uuid, String homeName){
+        try {
+            return  db.getHome(uuid, homeName);
+        }
+        catch (SQLException ex){
+            console.sendMessage(prefix + "ERROR: " + ex);
+        }
+        return null;
+    }
+
     public void saveHome(String uuid) {
         db.saveHomes(uuid);
     }
 
-    public void deleteHome(String uuid, String homeName) {
+    public void deleteHome(Home home) {
         try {
-            db.deleteHome(uuid, homeName);
+            db.deleteHome(home);
         } catch (SQLException ex) {
             console.sendMessage(prefix + "ERROR: " + ex);
         }
@@ -52,6 +62,10 @@ public class PlayerData {
 
     public void addHome(Home home) {
         db.addHomeToCache(home);
+    }
+
+    public void replaceHome(Home home, Home newHome) {
+        db.replaceHomeInCache(home, newHome);
     }
 
 }

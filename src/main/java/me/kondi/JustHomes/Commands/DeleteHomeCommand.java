@@ -8,8 +8,6 @@ import me.kondi.JustHomes.JustHomes;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
 
 public class DeleteHomeCommand {
 
@@ -36,19 +34,18 @@ public class DeleteHomeCommand {
             return;
         }
         String homeName = args[0];
-        final String homeNameToStream = homeName;
-        List<Home> homeList = playerData.listOfHomes(uuid);
-        Optional<Home> newHome =  homeList.stream().filter(home -> home.getHomeName().equalsIgnoreCase(homeNameToStream)).findFirst();
+        Home home = playerData.getHome(uuid, homeName);
 
-        if (newHome.isPresent()) {
-            homeName = newHome.get().getHomeName();
-            HomeNames.addHomeName(uuid, homeName);
-            playerData.deleteHome(uuid, homeName);
-            p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("DeletedHome")));
+        if (home == null) {
+            p.sendMessage(prefix + messages.get("UnknownHomeName"));
             return;
         }
-        p.sendMessage(prefix + messages.get("UnknownHomeName"));
+
+        HomeNames.addHomeName(uuid, homeName);
+        playerData.deleteHome(home);
+        p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("DeletedHome")));
     }
+
 }
 
 
