@@ -9,6 +9,7 @@ ListColorOfIndexName: "&6"
 
 #SetHome
 SetOnlyOnGroundException: "&cYou must be on the ground!"
+CorruptedHome: "&cYour home might be corrupted!"
 SpecifyHomeNameException: "&cYou must specify a home name!"
 CreatedHome: "%justhomes_homename% has been successfully created!"
 TooMuchHomesException: "&cYou have too much homes! Try deleting any of them."

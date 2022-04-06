@@ -9,6 +9,7 @@ ListColorOfIndexName: "&6"
 
 #SetHome
 SetOnlyOnGroundException: "&cMusisz stać na bloku aby to zrobić!"
+CorruptedHome: "&cLokalizacja mogła zostać uszkodzona!"
 SpecifyHomeNameException: "&cMusisz nazwać swój dom!"
 CreatedHome: "&6%justhomes_homename% &7został stworzony!"
 TooMuchHomesException: "&cMasz za dużo domów! Spróbuj kilka usunąć."

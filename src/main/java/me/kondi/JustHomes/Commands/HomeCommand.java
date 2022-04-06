@@ -6,9 +6,12 @@ import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class HomeCommand {
@@ -17,7 +20,9 @@ public class HomeCommand {
     private final String prefix;
     private HashMap<String, String> messages;
     private PlayerData playerData;
-
+    private Material[] damageBlocksMaterials = {Material.CACTUS, Material.FIRE, Material.CAMPFIRE, Material.SOUL_FIRE, Material.SOUL_CAMPFIRE, Material.MAGMA_BLOCK,
+            Material.SWEET_BERRY_BUSH, Material.WITHER_ROSE, Material.LAVA, Material.POWDER_SNOW};
+    private List<Material> damageBlocks = Arrays.asList(damageBlocksMaterials);
     public HomeCommand(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
@@ -49,6 +54,15 @@ public class HomeCommand {
         }
 
         Location loc = new Location(Bukkit.getWorld(home.getWorldName()), home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch());
+
+        if (plugin.simpleProtection) {
+            Material middle = loc.getBlock().getType();
+            Material below = p.getWorld().getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ()).getType();
+            if (damageBlocks.contains(below) || damageBlocks.contains(middle) || middle == Material.NETHER_PORTAL) {
+                p.sendMessage(prefix + messages.get("CorruptedHome"));
+                return;
+            }
+        }
         int duration = plugin.config.getInt("DelayInTeleport");
         HomeNames.addHomeName(uuid, homeName);
         plugin.teleportPlayer.teleportPlayer(p, loc, duration, homeName);
