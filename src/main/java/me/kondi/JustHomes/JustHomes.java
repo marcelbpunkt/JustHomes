@@ -58,6 +58,8 @@ public class JustHomes extends JavaPlugin {
 
     }
 
+
+
     public void loadConfig() {
         cfgManager.setup(); //create folder
         saveResource();

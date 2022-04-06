@@ -4,6 +4,7 @@ import me.kondi.JustHomes.Data.PlayerData;
 import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
+import me.kondi.JustHomes.Permissions.PermissionChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -47,9 +48,14 @@ public class HomeCommand {
 
         String homeName = args[0];
         Home home = playerData.getHome(uuid, homeName);
+        List<Home> homeList = playerData.listOfHomes(uuid);
 
         if (home == null) {
             p.sendMessage(prefix + messages.get("UnknownHomeName"));
+            return;
+        }
+        if(homeList.indexOf(home) + 1 > PermissionChecker.checkHomesMaxAmount(p)){
+            p.sendMessage(prefix + messages.get("UnavailableHome"));
             return;
         }
 

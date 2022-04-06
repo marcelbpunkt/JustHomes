@@ -11,20 +11,20 @@ ListColorOfIndexName: "&6"
 SetOnlyOnGroundException: "&cYou must be on the ground!"
 CorruptedHome: "&cYour home might be corrupted!"
 SpecifyHomeNameException: "&cYou must specify a home name!"
-CreatedHome: "%justhomes_homename% has been successfully created!"
+CreatedHome: "&6%justhomes_homename%&7 has been successfully created!"
 TooMuchHomesException: "&cYou have too much homes! Try deleting any of them."
 UnknownHomeName: "&cUnknown home name!"
-EditedHome: "%justhomes_homename% has been edited!"
+EditedHome: "&6%justhomes_homename%&7 has been edited!"
 
 #Teleportation
-Teleporting: "Teleporting in %justhomes_teleportationtime% seconds! &cDont move!"
-SuccesfullTeleportation: "You were succesfully teleported to &%justhomes_homename%"
-ActionBarNameWhileTeleporting: "Teleporting..."
-TeleportationCancelled: "Teleportation Cancelled!"
-UnavailableHome: "That home is no longer available!"
+Teleporting: "&7Teleporting in &6%justhomes_teleportationtime% &7seconds! &cDont move!"
+SuccesfullTeleportation: "&7You were succesfully teleported to &6%justhomes_homename%"
+ActionBarNameWhileTeleporting: "&aTeleporting..."
+TeleportationCancelled: "&cTeleportation Cancelled!"
+UnavailableHome: "&cThat home is no longer available!"
 
 #DeleteHome
-DeletedHome: "%justhomes_homename% has been successfully deleted!"
+DeletedHome: "&6%justhomes_homename%&7 has been successfully deleted!"
 
 #Other
 NotHumanException: "You are not a player!"

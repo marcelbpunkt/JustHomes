@@ -6,23 +6,18 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 
 public class PermissionChecker {
     private JustHomes plugin;
-
+    private static int maxAmount;
     public PermissionChecker(JustHomes plugin) {
         this.plugin = plugin;
+        this.maxAmount = plugin.homesMaxAmount;
     }
 
 
-    public int checkHomesMaxAmount(Player p){
-        int homesMaxAmount = plugin.homesMaxAmount;
-        for(PermissionAttachmentInfo permissions : p.getEffectivePermissions()){
-            String permission = permissions.getPermission();
-            if(permission.contains("justhomes.maxhomes.")){
-                int homesMaxAmountFromPermissions = Integer.parseInt(permission.split("\\.")[2]);
-                //if(homesMaxAmountFromPermissions > homesMaxAmount){
-                    homesMaxAmount = homesMaxAmountFromPermissions;
-                //}
-            }
-        }
-        return homesMaxAmount;
+    public static int checkHomesMaxAmount(Player p) {
+        for (PermissionAttachmentInfo permissions : p.getEffectivePermissions())
+            if (permissions.getPermission().contains("justhomes.maxhomes."))
+                return Integer.parseInt(permissions.getPermission().split("\\.")[2]);
+
+        return maxAmount;
     }
 }
