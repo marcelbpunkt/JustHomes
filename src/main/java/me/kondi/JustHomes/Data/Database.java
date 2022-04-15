@@ -4,7 +4,6 @@ import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.JustHomes;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.scheduler.BukkitScheduler;
 
 import java.sql.*;
 import java.util.*;
@@ -13,7 +12,7 @@ public class Database {
 
 
     //Cache
-    private HashMap<String, List<Home>> CachedHomes = new HashMap<>();
+    private HashMap<String, List<Home>> cachedHomes = new HashMap<>();
 
     //Database objects and connection data
     private Connection con;
@@ -66,7 +65,7 @@ public class Database {
     }
 
     public void saveHomes(String uuid){
-        CachedHomes.get(uuid).forEach(home -> {
+        cachedHomes.get(uuid).forEach(home -> {
             try {
                 setHome(home);
             } catch (SQLException e) {
@@ -122,17 +121,17 @@ public class Database {
 
     //Get homes amount
     public int getHomesAmount(String uuid) throws SQLException {
-        return CachedHomes.get(uuid).size();
+        return cachedHomes.get(uuid).size();
     }
 
     //Get cached home list
     public List<Home> getCachedListOfHomes(String uuid) {
-        return CachedHomes.get(uuid);
+        return cachedHomes.get(uuid);
     }
 
     //Get Home
     public Home getHome(String uuid, String homeName) throws SQLException {
-        Optional<Home> home = CachedHomes.get(uuid).stream().filter(h -> h.getHomeName().equalsIgnoreCase(homeName)).findFirst();
+        Optional<Home> home = cachedHomes.get(uuid).stream().filter(h -> h.getHomeName().equalsIgnoreCase(homeName)).findFirst();
         return home.orElse(null);
     }
 
@@ -140,7 +139,7 @@ public class Database {
     //Delete Home
     public void deleteHome(Home home) throws SQLException {
         try {
-            CachedHomes.get(home.getOwner()).remove(home);
+            cachedHomes.get(home.getOwner()).remove(home);
 
             String query = "DELETE FROM HOMES WHERE UUID = ? AND HomeName = ?";
             PreparedStatement preparedStmtInsert = con.prepareStatement(query);
@@ -219,7 +218,7 @@ public class Database {
                 listOfHomes.add(home);
             }
 
-            CachedHomes.put(uuid, listOfHomes);
+            cachedHomes.put(uuid, listOfHomes);
 
         } catch (Exception ex) {
 
@@ -231,14 +230,14 @@ public class Database {
 
     public void addHomeToCache(Home home) {
 
-        CachedHomes.get(home.getOwner()).add(home);
+        cachedHomes.get(home.getOwner()).add(home);
 
     }
 
     public void replaceHomeInCache(Home home, Home newHome){
-        List<Home> homeList = CachedHomes.get(home.getOwner());
+        List<Home> homeList = cachedHomes.get(home.getOwner());
         homeList.set(homeList.indexOf(home), newHome);
-        CachedHomes.replace(home.getOwner(), homeList );
+        cachedHomes.replace(home.getOwner(), homeList );
     }
 
 }

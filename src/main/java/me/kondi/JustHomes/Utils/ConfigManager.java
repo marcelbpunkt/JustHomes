@@ -10,11 +10,11 @@ import java.util.Set;
 
 public class ConfigManager {
 
-    public YamlConfiguration folderCfg;
-    public File folder;
-    public File file;
-    public HashMap<String, String> messages = new HashMap<>();
-    public YamlConfiguration messagesCfg;
+    private YamlConfiguration folderCfg;
+    private File folder;
+    private File file;
+    
+    private YamlConfiguration MessagesCfg;
     private final JustHomes plugin;
 
     public ConfigManager(JustHomes plugin) {
@@ -36,16 +36,16 @@ public class ConfigManager {
         folderCfg = YamlConfiguration.loadConfiguration(folder);
     }
 
-    public HashMap<String, String> loadLanguage(String lang) {
+    public void loadLanguage(String lang) {
 
         file = new File(plugin.getDataFolder() + File.separator + "Languages" + File.separator + lang);
-        messagesCfg = YamlConfiguration.loadConfiguration(file);
-        Set<String> keys = messagesCfg.getConfigurationSection("").getKeys(false);
-        messages.clear();
+        MessagesCfg = YamlConfiguration.loadConfiguration(file);
+        Set<String> keys = MessagesCfg.getConfigurationSection("").getKeys(false);
+        Messages.clear();
         for (String key : keys) {
-            messages.put(key, ChatColor.translateAlternateColorCodes('&',messagesCfg.getString(key)));
+            Messages.put(key, ChatColor.translateAlternateColorCodes('&',MessagesCfg.getString(key)));
         }
-        return messages;
+
 
     }
 

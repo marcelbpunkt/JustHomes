@@ -15,19 +15,19 @@ public class TeleportPlayer {
     public static HashMap<String, BukkitRunnable> tpCooldownTask = new HashMap<>();
     private final JustHomes plugin;
     private String prefix;
-    private HashMap<String, String> messages;
+    private HashMap<String, String> Messages;
 
     public TeleportPlayer(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
-        this.messages = plugin.messages;
+
     }
 
 
     public void teleportPlayer(Player p, Location loc, int duration, String name) {
         String uuid = p.getUniqueId().toString();
         tpCooldown.put(uuid, duration);
-        p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("Teleporting")));
+        p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, Messages.get("Teleporting")));
 
 
         tpCooldownTask.put(uuid, new BukkitRunnable() {
@@ -35,7 +35,7 @@ public class TeleportPlayer {
                 if (tpCooldown.get(uuid) > 0) {
                     tpCooldown.put(uuid, tpCooldown.get(uuid) - 1);
                     if (tpCooldown.get(uuid) == 0)
-                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(messages.get("ActionBarNameWhileTeleporting")));
+                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Messages.get("ActionBarNameWhileTeleporting")));
                     else {
                         p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(tpCooldown.get(uuid).toString()));
                     }
@@ -45,7 +45,7 @@ public class TeleportPlayer {
 
                 if (tpCooldown.get(uuid) == 0) {
                     p.teleport(loc);
-                    p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("SuccesfullTeleportation")));
+                    p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, Messages.get("SuccesfullTeleportation")));
                     tpCooldownTask.get(uuid).cancel();
                     tpCooldown.remove(uuid);
                     tpCooldownTask.remove(uuid);
@@ -57,7 +57,7 @@ public class TeleportPlayer {
             }
 
         });
-        tpCooldownTask.get(uuid).runTaskTimer(plugin, 0, 20);
+        tpCooldownTask.get(uuid).runTaskTimerAsynchronously(plugin, 0, 20);
     }
 }
 

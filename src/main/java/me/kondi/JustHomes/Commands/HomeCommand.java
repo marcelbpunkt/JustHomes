@@ -5,6 +5,7 @@ import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
 import me.kondi.JustHomes.Permissions.PermissionChecker;
+import me.kondi.JustHomes.Utils.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,7 +20,6 @@ public class HomeCommand {
 
     private final JustHomes plugin;
     private final String prefix;
-    private HashMap<String, String> messages;
     private PlayerData playerData;
     private Material[] damageBlocksMaterials = {Material.CACTUS, Material.FIRE, Material.CAMPFIRE, Material.SOUL_FIRE, Material.SOUL_CAMPFIRE, Material.MAGMA_BLOCK,
             Material.SWEET_BERRY_BUSH, Material.WITHER_ROSE, Material.LAVA, Material.POWDER_SNOW};
@@ -27,7 +27,7 @@ public class HomeCommand {
     public HomeCommand(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
-        this.messages = plugin.messages;
+
         this.playerData = plugin.playerData;
     }
 
@@ -36,12 +36,12 @@ public class HomeCommand {
 
         String uuid = p.getUniqueId().toString();
         if (playerData.countPlayerHomes(uuid) == 0) {
-            p.sendMessage(prefix + messages.get("UserHasNoHomes"));
+            p.sendMessage(prefix + Messages.get("UserHasNoHomes"));
             return;
         }
 
         if (args.length == 0) {
-            p.sendMessage(prefix + messages.get("SpecifyHomeNameException"));
+            p.sendMessage(prefix + Messages.get("SpecifyHomeNameException"));
             return;
         }
 
@@ -51,11 +51,11 @@ public class HomeCommand {
         List<Home> homeList = playerData.listOfHomes(uuid);
 
         if (home == null) {
-            p.sendMessage(prefix + messages.get("UnknownHomeName"));
+            p.sendMessage(prefix + Messages.get("UnknownHomeName"));
             return;
         }
         if(homeList.indexOf(home) + 1 > PermissionChecker.checkHomesMaxAmount(p)){
-            p.sendMessage(prefix + messages.get("UnavailableHome"));
+            p.sendMessage(prefix + Messages.get("UnavailableHome"));
             return;
         }
 
@@ -65,7 +65,7 @@ public class HomeCommand {
             Material middle = loc.getBlock().getType();
             Material below = p.getWorld().getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ()).getType();
             if (damageBlocks.contains(below) || damageBlocks.contains(middle) || middle == Material.NETHER_PORTAL) {
-                p.sendMessage(prefix + messages.get("CorruptedHome"));
+                p.sendMessage(prefix + Messages.get("CorruptedHome"));
                 return;
             }
         }

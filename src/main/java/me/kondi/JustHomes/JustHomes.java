@@ -8,6 +8,7 @@ import me.kondi.JustHomes.Listeners.Events;
 import me.kondi.JustHomes.Permissions.PermissionChecker;
 import me.kondi.JustHomes.Teleportation.TeleportPlayer;
 import me.kondi.JustHomes.Utils.ConfigManager;
+import me.kondi.JustHomes.Utils.Messages;
 import me.kondi.JustHomes.Utils.Placeholder;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -20,7 +21,7 @@ public class JustHomes extends JavaPlugin {
     public FileConfiguration config;
     public String prefix = "JHomes >> ";
     public ConfigManager cfgManager = new ConfigManager(this);
-    public HashMap<String, String> messages = new HashMap<>();
+
     public boolean simpleProtection;
     public int homesMaxAmount;
 
@@ -37,6 +38,7 @@ public class JustHomes extends JavaPlugin {
     public HomeCommand homeCommand;
     public ListHomeCommand listHome;
     public DeleteHomeCommand deleteHome;
+
 
 
     @Override
@@ -62,7 +64,7 @@ public class JustHomes extends JavaPlugin {
 
     public void loadConfig() {
         cfgManager.setup(); //create folder
-        saveResource();
+        Messages.reload();
 
     }
 
@@ -77,7 +79,6 @@ public class JustHomes extends JavaPlugin {
         listHome = new ListHomeCommand(this);
         deleteHome = new DeleteHomeCommand(this);
         permissionChecker = new PermissionChecker(this);
-
         homeNames = new HomeNames();
         new Placeholder().register();
     }
@@ -100,7 +101,7 @@ public class JustHomes extends JavaPlugin {
     public void setupConfig() {
         saveDefaultConfig();
         this.config = getConfig();
-        saveResource();
+        Messages.reload();
         prefix = config.getString(ChatColor.translateAlternateColorCodes('&', "Prefix"));
         simpleProtection = config.getBoolean("SimpleProtection");
         homesMaxAmount = config.getInt("HomesMaxAmount");
@@ -108,13 +109,6 @@ public class JustHomes extends JavaPlugin {
     }
 
     //Saving language files
-    public void saveResource() {
-        reloadConfig();
-        this.config = getConfig();
-        String lang = config.getString("Language") + ".yml";
-        this.saveResource("Languages/" + lang, true);
-        this.messages = cfgManager.loadLanguage(lang);
 
-    }
 
 }

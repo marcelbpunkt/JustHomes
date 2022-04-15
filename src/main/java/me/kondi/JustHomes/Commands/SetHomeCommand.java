@@ -6,6 +6,7 @@ import me.kondi.JustHomes.Data.PlayerData;
 import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
+import me.kondi.JustHomes.Utils.Messages;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -17,7 +18,7 @@ public class SetHomeCommand {
 
     private JustHomes plugin;
     private String prefix;
-    private HashMap<String, String> messages = new HashMap<>();
+    
     private PlayerData playerData;
     private Material[] damageBlocksMaterials = {Material.CACTUS, Material.FIRE, Material.CAMPFIRE, Material.SOUL_FIRE, Material.SOUL_CAMPFIRE, Material.MAGMA_BLOCK,
             Material.SWEET_BERRY_BUSH, Material.WITHER_ROSE, Material.LAVA, Material.POWDER_SNOW};
@@ -26,7 +27,7 @@ public class SetHomeCommand {
     public SetHomeCommand(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
-        this.messages = plugin.messages;
+
         this.playerData = plugin.playerData;
     }
 
@@ -41,13 +42,13 @@ public class SetHomeCommand {
             Material middle = p.getLocation().getBlock().getType();
             Material below = p.getWorld().getBlockAt(p.getLocation().getBlockX(), p.getLocation().getBlockY() - 1, p.getLocation().getBlockZ()).getType();
             if (damageBlocks.contains(below) || damageBlocks.contains(middle) || middle == Material.NETHER_PORTAL) {
-                p.sendMessage(prefix + messages.get("SetOnlyOnGroundException"));
+                p.sendMessage(prefix + Messages.get("SetOnlyOnGroundException"));
                 return;
             }
         }
 
         if (args.length == 0) {
-            p.sendMessage(prefix + messages.get("SpecifyHomeNameException"));
+            p.sendMessage(prefix + Messages.get("SpecifyHomeNameException"));
             return;
         }
 
@@ -55,22 +56,22 @@ public class SetHomeCommand {
 
         if (playerHomes.size() == 0) {
             saveLoc(p, args[0]);
-            p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("CreatedHome")));
+            p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, Messages.get("CreatedHome")));
         } else {
 
             Home home = playerData.getHome(uuid, args[0]);
             if (home != null) {
                 replaceLoc(p, home);
-                p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("EditedHome")));
+                p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, Messages.get("EditedHome")));
                 return;
             }
             if (playerHomes.size() >= plugin.permissionChecker.checkHomesMaxAmount(p)) {
-                p.sendMessage(prefix + messages.get("TooMuchHomesException"));
+                p.sendMessage(prefix + Messages.get("TooMuchHomesException"));
                 return;
             }
 
             saveLoc(p, args[0]);
-            p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("CreatedHome")));
+            p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, Messages.get("CreatedHome")));
         }
     }
 

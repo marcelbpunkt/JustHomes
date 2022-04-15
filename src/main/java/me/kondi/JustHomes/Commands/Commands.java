@@ -3,6 +3,7 @@ package me.kondi.JustHomes.Commands;
 
 import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.JustHomes;
+import me.kondi.JustHomes.Utils.Messages;
 import org.bukkit.Material;
 import org.bukkit.block.data.type.Light;
 import org.bukkit.command.Command;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +25,7 @@ public class Commands implements CommandExecutor, TabCompleter {
     public Commands(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
+
     }
 
     @Override
@@ -30,13 +33,13 @@ public class Commands implements CommandExecutor, TabCompleter {
 
         if (cmd.getName().equalsIgnoreCase("reloadlanguage")) {
             if (sender.isOp() || sender.hasPermission("justhomes.loadlanguage")) {
-                plugin.saveResource();
+                Messages.reload();
                 return true;
             }
         }
 
         if (!(sender instanceof Player p)) {
-            sender.sendMessage(prefix + plugin.messages.get("NotHumanException"));
+            sender.sendMessage(prefix + Messages.get("NotHumanException"));
             return true;
         }
         if (cmd.getName().equalsIgnoreCase("listhome")) {
@@ -72,7 +75,7 @@ public class Commands implements CommandExecutor, TabCompleter {
 
                 ArrayList<String> homes = new ArrayList<>();
                 if (!(sender instanceof Player p)) {
-                    sender.sendMessage(prefix + plugin.messages.get("NotPlayerException"));
+                    sender.sendMessage(prefix + Messages.get("NotPlayerException"));
                     return homes;
                 }
                 String uuid = p.getUniqueId().toString();

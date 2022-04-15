@@ -5,6 +5,7 @@ import me.kondi.JustHomes.Data.PlayerData;
 import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.Home.HomeNames;
 import me.kondi.JustHomes.JustHomes;
+import me.kondi.JustHomes.Utils.Messages;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -12,12 +13,12 @@ import java.util.HashMap;
 public class DeleteHomeCommand {
 
     private final String prefix;
-    private final HashMap<String, String> messages;
+
     private final PlayerData playerData;
 
     public DeleteHomeCommand(JustHomes plugin) {
         this.prefix = plugin.prefix;
-        this.messages = plugin.messages;
+
         this.playerData = plugin.playerData;
     }
 
@@ -26,24 +27,24 @@ public class DeleteHomeCommand {
         String uuid = p.getUniqueId().toString();
 
         if (args.length == 0) {
-            p.sendMessage(prefix + messages.get("SpecifyHomeNameException"));
+            p.sendMessage(prefix + Messages.get("SpecifyHomeNameException"));
             return;
         }
         if (playerData.countPlayerHomes(uuid) == 0) {
-            p.sendMessage(prefix + messages.get("UserHasNoHomes"));
+            p.sendMessage(prefix + Messages.get("UserHasNoHomes"));
             return;
         }
         String homeName = args[0];
         Home home = playerData.getHome(uuid, homeName);
 
         if (home == null) {
-            p.sendMessage(prefix + messages.get("UnknownHomeName"));
+            p.sendMessage(prefix + Messages.get("UnknownHomeName"));
             return;
         }
 
         HomeNames.addHomeName(uuid, homeName);
         playerData.deleteHome(home);
-        p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, messages.get("DeletedHome")));
+        p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, Messages.get("DeletedHome")));
     }
 
 }
