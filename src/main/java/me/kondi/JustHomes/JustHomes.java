@@ -39,10 +39,16 @@ public class JustHomes extends JavaPlugin {
     public ListHomeCommand listHome;
     public DeleteHomeCommand deleteHome;
 
+    private static JustHomes instance;
+
+    public static JustHomes getInstance() {
+        return instance;
+    }
 
 
     @Override
     public void onEnable() {
+        instance = this;
 
         setupConfig();
         loadConfig();
