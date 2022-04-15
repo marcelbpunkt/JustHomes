@@ -4,7 +4,7 @@ description: Homes plugin, create home and enjoy.
 api-version: 1.18
 author: Kondee
 main: me.kondi.JustHomes.JustHomes
-depend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI]
 commands:
   sethome:
     description: You can create homes with it.

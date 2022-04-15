@@ -50,19 +50,24 @@ public class JustHomes extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        if(getServer().getPluginManager().getPlugin("PlaceholderAPI") == null){
+            getServer().getConsoleSender().sendMessage(String.format("[%s] Disabled due to no PlaceholderAPI dependency found!", getDescription().getName()));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
         setupConfig();
         loadConfig();
         loadClasses();
-        getServer().getConsoleSender().sendMessage(prefix + "Working");
         loadCommands();
         getServer().getPluginManager().registerEvents(events, this);
     }
 
     @Override
     public void onDisable() {
-        getServer().getConsoleSender().sendMessage(prefix + "Not Working");
         loadConfig();
-        db.stopDatabaseConnection();
+        if(db != null)
+            db.stopDatabaseConnection();
 
     }
 
