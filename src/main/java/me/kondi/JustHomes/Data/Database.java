@@ -4,6 +4,7 @@ import me.kondi.JustHomes.Home.Home;
 import me.kondi.JustHomes.JustHomes;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.*;
 import java.util.*;
@@ -55,7 +56,7 @@ public class Database {
 
             st = con.createStatement();
             createTable();
-
+            fillWithTestData();
         } catch (Exception ex) {
 
             console.sendMessage(prefix + "ERROR: " + ex);
@@ -119,6 +120,32 @@ public class Database {
 
     }
 
+    public void fillWithTestData(){
+        Random random = new Random();
+        BukkitRunnable runnable = new BukkitRunnable() {
+            @Override
+            public void run() {
+                String newUUID;
+
+                for(int i = 0; i<1000; i++){
+                    newUUID = UUID.randomUUID().toString();
+                    List<Home> homes =new ArrayList<>();
+                    for(int j = 0; j<5; j++){
+                        homes.add(new Home(newUUID, "homename." + i +"." + j, "world",random.nextDouble(), random.nextDouble(),
+                        random.nextDouble(), random.nextFloat(), random.nextFloat()));
+                    }
+                    cachedHomes.put(newUUID, homes);
+                }
+                if(cachedHomes.size() == 1000){
+                    System.out.println(prefix  + "Generating end");
+                    cancel();
+                }
+
+            }
+        };
+        runnable.runTask(plugin);
+    }
+
     //Get homes amount
     public int getHomesAmount(String uuid) throws SQLException {
         return cachedHomes.get(uuid).size();
@@ -132,6 +159,7 @@ public class Database {
     //Get Home
     public Home getHome(String uuid, String homeName) throws SQLException {
         Optional<Home> home = cachedHomes.get(uuid).stream().filter(h -> h.getHomeName().equalsIgnoreCase(homeName)).findFirst();
+
         return home.orElse(null);
     }
 
