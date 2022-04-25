@@ -122,12 +122,13 @@ public class Database {
 
     public void fillWithTestData(){
         Random random = new Random();
+        long startTime = System.currentTimeMillis();
         BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
                 String newUUID;
 
-                for(int i = 0; i<1000; i++){
+                for(int i = 0; i<100000; i++){
                     newUUID = UUID.randomUUID().toString();
                     List<Home> homes =new ArrayList<>();
                     for(int j = 0; j<5; j++){
@@ -136,8 +137,9 @@ public class Database {
                     }
                     cachedHomes.put(newUUID, homes);
                 }
-                if(cachedHomes.size() == 1000){
-                    System.out.println(prefix  + "Generating end");
+                if(cachedHomes.size() == 100000){
+                    int elapsedTime = (int) ((System.currentTimeMillis() - startTime)/1000);
+                    System.out.println(prefix  + "Generating end in: " + elapsedTime + "s");
                     cancel();
                 }
 

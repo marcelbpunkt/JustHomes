@@ -14,7 +14,7 @@ public class ConfigManager {
     private File folder;
     private File file;
     
-    private YamlConfiguration MessagesCfg;
+    private YamlConfiguration messagesCfg;
     private final JustHomes plugin;
 
     public ConfigManager(JustHomes plugin) {
@@ -39,11 +39,11 @@ public class ConfigManager {
     public void loadLanguage(String lang) {
 
         file = new File(plugin.getDataFolder() + File.separator + "Languages" + File.separator + lang);
-        MessagesCfg = YamlConfiguration.loadConfiguration(file);
-        Set<String> keys = MessagesCfg.getConfigurationSection("").getKeys(false);
+        messagesCfg = YamlConfiguration.loadConfiguration(file);
+        Set<String> keys = messagesCfg.getConfigurationSection("").getKeys(false);
         Messages.clear();
         for (String key : keys) {
-            Messages.put(key, ChatColor.translateAlternateColorCodes('&',MessagesCfg.getString(key)));
+            Messages.put(key, ChatColor.translateAlternateColorCodes('&',messagesCfg.getString(key)));
         }
 
 
