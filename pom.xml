@@ -27,6 +27,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>${artifactId}-${project.version}</finalName>
     </build>
 
     <repositories>
