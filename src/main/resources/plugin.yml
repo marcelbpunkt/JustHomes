@@ -1,8 +1,8 @@
 name: JustHomes
-version: 1.18.1
+version: 1.19
 description: Homes plugin, create home and enjoy.
-api-version: 1.18
-author: Kondee
+api-version: 1.19
+author: Kondee3
 main: me.kondi.JustHomes.JustHomes
 softdepend: [PlaceholderAPI]
 commands:
