@@ -1,7 +1,7 @@
 
 
 ##
-![Logo](https://www.spigotmc.org/attachments/%C5%82adny-png.440592/)
+![Logo](https://github.com/Kondee3/JustHomes/blob/master/logo.png)
 It's a repository of my project JustHomes for spigot servers.
 
 
