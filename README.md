@@ -26,7 +26,7 @@ Contribute to make the list longer :wink:
 |Polish|:heavy_check_mark:|
 
 ## Commands
-/sethome - You can create homes with it
+
 
 | Command             |Alias| Description|
 | --------------------|-----|------------|
