@@ -66,9 +66,10 @@ public class JustHomes extends JavaPlugin {
     @Override
     public void onDisable() {
         loadConfig();
-        if(db != null)
+        if(db != null){
+            db.saveAllHomes();
             db.stopDatabaseConnection();
-
+        }
     }
 
 

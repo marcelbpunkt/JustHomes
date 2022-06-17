@@ -56,7 +56,7 @@ public class Database {
 
             st = con.createStatement();
             createTable();
-            fillWithTestData();
+            //fillWithTestData();
         } catch (Exception ex) {
 
             console.sendMessage(prefix + "ERROR: " + ex);
@@ -73,6 +73,18 @@ public class Database {
                 e.printStackTrace();
             }
         });
+    }
+    public void saveAllHomes(){
+        cachedHomes.entrySet().forEach(entry ->{
+            for(Home home : entry.getValue()) {
+                try {
+                    setHome(home);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     //Save home
@@ -118,34 +130,6 @@ public class Database {
 
         }
 
-    }
-
-    public void fillWithTestData(){
-        Random random = new Random();
-        long startTime = System.currentTimeMillis();
-        BukkitRunnable runnable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                String newUUID;
-
-                for(int i = 0; i<100000; i++){
-                    newUUID = UUID.randomUUID().toString();
-                    List<Home> homes =new ArrayList<>();
-                    for(int j = 0; j<5; j++){
-                        homes.add(new Home(newUUID, "homename." + i +"." + j, "world",random.nextDouble(), random.nextDouble(),
-                        random.nextDouble(), random.nextFloat(), random.nextFloat()));
-                    }
-                    cachedHomes.put(newUUID, homes);
-                }
-                if(cachedHomes.size() == 100000){
-                    int elapsedTime = (int) ((System.currentTimeMillis() - startTime)/1000);
-                    System.out.println(prefix  + "Generating end in: " + elapsedTime + "s");
-                    cancel();
-                }
-
-            }
-        };
-        runnable.runTask(plugin);
     }
 
     //Get homes amount

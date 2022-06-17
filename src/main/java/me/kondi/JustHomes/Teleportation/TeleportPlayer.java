@@ -2,6 +2,7 @@ package me.kondi.JustHomes.Teleportation;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.kondi.JustHomes.JustHomes;
+import me.kondi.JustHomes.Utils.Messages;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
@@ -15,7 +16,6 @@ public class TeleportPlayer {
     public static HashMap<String, BukkitRunnable> tpCooldownTask = new HashMap<>();
     private final JustHomes plugin;
     private String prefix;
-    private HashMap<String, String> Messages;
 
     public TeleportPlayer(JustHomes plugin) {
         this.plugin = plugin;
@@ -49,7 +49,7 @@ public class TeleportPlayer {
             }
 
         });
-        tpCooldownTask.get(uuid).runTaskTimerAsynchronously(plugin, 0, 20);
+        tpCooldownTask.get(uuid).runTaskTimer(plugin, 0, 20);
     }
 }
 
