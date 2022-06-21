@@ -36,3 +36,15 @@ Contribute to make the list longer :wink:
 |delhome|dh|Deletes your home|
 |reloadlanguage|-|Reloads languages|
 
+## Permissions
+
+
+| Permission               | Player              |
+|--------------------------|---------------------|
+| justhomes.sethome        | Default             |
+| justhomes.home           | Default             |
+| justhomes.listhome       | Default             |
+| justhomes.delhome        | Default             |
+| justhomes.reloadlanguage | OP                  |
+| justhomes.maxhomes       | Value  (Default: 5) |
+

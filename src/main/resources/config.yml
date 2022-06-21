@@ -16,9 +16,9 @@ SimpleProtection: true
 #Database
 #Types:
 # - SQLITE - only DatabaseType, it's default
-# - MYSQL - fill all
+# - MYSQL - Uncomment and fill Host, DatabaseName, Username, Password
 DatabaseType: SQLITE
-Host:
-DatabaseName:
-Username:
-Password:
+#Host:
+#DatabaseName:
+#Username:
+#Password:

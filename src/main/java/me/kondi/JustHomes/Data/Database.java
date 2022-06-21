@@ -45,18 +45,14 @@ public class Database {
                 this.database = config.getString("DatabaseName");
                 this.username = config.getString("Username");
                 this.password = config.getString("Password");
-                Class.forName("com.mysql.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://" + host + "/" + database + "", username, password);
             } else if (databaseType.equalsIgnoreCase("SQLITE")) {
-                Class.forName("org.sqlite.JDBC");
                 con = DriverManager.getConnection("jdbc:sqlite:" + plugin.getDataFolder() + "/playerdata/homeData.db");
-
             }
 
 
             st = con.createStatement();
             createTable();
-            //fillWithTestData();
         } catch (Exception ex) {
 
             console.sendMessage(prefix + "ERROR: " + ex);

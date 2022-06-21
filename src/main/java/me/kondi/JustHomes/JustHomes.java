@@ -1,5 +1,6 @@
 package me.kondi.JustHomes;
 
+import com.google.common.base.Charsets;
 import me.kondi.JustHomes.Commands.*;
 import me.kondi.JustHomes.Data.Database;
 import me.kondi.JustHomes.Data.PlayerData;
@@ -9,16 +10,28 @@ import me.kondi.JustHomes.Permissions.PermissionChecker;
 import me.kondi.JustHomes.Teleportation.TeleportPlayer;
 import me.kondi.JustHomes.Utils.ConfigManager;
 import me.kondi.JustHomes.Utils.Messages;
+import me.kondi.JustHomes.Utils.Metrics;
 import me.kondi.JustHomes.Utils.Placeholder;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.MemoryConfiguration;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Optional;
+import java.util.Set;
+
 
 public class JustHomes extends JavaPlugin {
 
     public FileConfiguration config;
+
     public String prefix = "JHomes >> ";
     public ConfigManager cfgManager = new ConfigManager(this);
 
@@ -38,6 +51,8 @@ public class JustHomes extends JavaPlugin {
     public HomeCommand homeCommand;
     public ListHomeCommand listHome;
     public DeleteHomeCommand deleteHome;
+    private Metrics metrics;
+
 
     private static JustHomes instance;
 
@@ -50,11 +65,12 @@ public class JustHomes extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        if(getServer().getPluginManager().getPlugin("PlaceholderAPI") == null){
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
             getServer().getConsoleSender().sendMessage(String.format("[%s] Disabled due to no PlaceholderAPI dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
 
         setupConfig();
         loadConfig();
@@ -66,12 +82,11 @@ public class JustHomes extends JavaPlugin {
     @Override
     public void onDisable() {
         loadConfig();
-        if(db != null){
+        if (db != null) {
             db.saveAllHomes();
             db.stopDatabaseConnection();
         }
     }
-
 
 
     public void loadConfig() {
@@ -81,6 +96,7 @@ public class JustHomes extends JavaPlugin {
     }
 
     public void loadClasses() {
+        metrics = new Metrics(this, 15508);
         db = new Database(this);
         playerData = new PlayerData(this);
         events = new Events(this);
@@ -112,15 +128,14 @@ public class JustHomes extends JavaPlugin {
     //Setting up config file
     public void setupConfig() {
         saveDefaultConfig();
-        this.config = getConfig();
-        Messages.reload();
+        cfgManager.updateConfig();
         prefix = config.getString(ChatColor.translateAlternateColorCodes('&', "Prefix"));
         simpleProtection = config.getBoolean("SimpleProtection");
         homesMaxAmount = config.getInt("HomesMaxAmount");
 
     }
 
-    //Saving language files
+
 
 
 }

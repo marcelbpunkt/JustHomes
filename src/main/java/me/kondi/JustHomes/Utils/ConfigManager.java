@@ -2,6 +2,7 @@ package me.kondi.JustHomes.Utils;
 
 import me.kondi.JustHomes.JustHomes;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -34,6 +35,29 @@ public class ConfigManager {
         folder.mkdir();
 
         folderCfg = YamlConfiguration.loadConfiguration(folder);
+    }
+
+    public void updateConfig() {
+        plugin.config = plugin.getConfig();
+        FileConfiguration oldConfig = plugin.config;
+        File cfgFile  =  new File(plugin.getDataFolder() + File.separator + "config.yml");
+        cfgFile.delete();
+        plugin.saveResource("config.yml", false);
+        updateConfigVariable();
+
+        //Updating new config.yml
+        Set<String> sections = oldConfig.getConfigurationSection("").getKeys(false);
+        for (String key : sections) {
+            if(plugin.config.contains(key))
+                plugin.config.set(key, oldConfig.get(key));
+        }
+        plugin.saveConfig();
+        updateConfigVariable();
+    }
+
+    private void updateConfigVariable(){
+        plugin.reloadConfig();
+        plugin.config = plugin.getConfig();
     }
 
     public void loadLanguage(String lang) {
