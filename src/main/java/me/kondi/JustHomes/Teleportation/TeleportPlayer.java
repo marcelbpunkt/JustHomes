@@ -24,8 +24,10 @@ public class TeleportPlayer {
     }
 
 
-    public void teleportPlayer(Player p, Location loc, int duration, String name) {
+    public void teleportPlayer(Player p, Location loc, int duration) {
         String uuid = p.getUniqueId().toString();
+
+
         tpCooldown.put(uuid, duration);
         p.sendMessage(prefix + PlaceholderAPI.setPlaceholders(p, Messages.get("Teleporting")));
 

@@ -6,7 +6,7 @@
 
     <groupId>me.kondi</groupId>
     <artifactId>JustHomes</artifactId>
-    <version>1.19.0.1</version>
+    <version>1.19.0.2</version>
 
     <licenses>
         <license>
@@ -50,7 +50,7 @@
             </plugin>
 
         </plugins>
-        <finalName>${artifactId}-${project.version}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
     </build>
 
     <repositories>

@@ -5,12 +5,14 @@ import me.kondi.JustHomes.JustHomes;
 import me.kondi.JustHomes.Teleportation.TeleportPlayer;
 import me.kondi.JustHomes.Utils.ConfigManager;
 import me.kondi.JustHomes.Utils.Messages;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 
@@ -18,13 +20,14 @@ public class Events implements Listener {
     private JustHomes plugin;
     private TeleportPlayer teleportPlayer;
     private ConfigManager cfgManager;
-    
+
     private PlayerData playerData;
 
     public Events(JustHomes plugin) {
         this.plugin = plugin;
         this.cfgManager = plugin.cfgManager;
         this.playerData = plugin.playerData;
+
     }
 
     @EventHandler
@@ -37,7 +40,7 @@ public class Events implements Listener {
             teleportPlayer.tpCooldown.remove(uuid);
 
         }
-        playerData.saveHome(uuid);
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> playerData.saveHome(uuid));
 
     }
 
@@ -60,8 +63,9 @@ public class Events implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
-        playerData.loadPlayerData(e.getPlayer().getUniqueId().toString());
+    public void onJoin(PlayerJoinEvent e) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> playerData.loadPlayerData(e.getPlayer().getUniqueId().toString()));
+
     }
 
 

@@ -24,11 +24,13 @@ public class HomeCommand {
     private Material[] damageBlocksMaterials = {Material.CACTUS, Material.FIRE, Material.CAMPFIRE, Material.SOUL_FIRE, Material.SOUL_CAMPFIRE, Material.MAGMA_BLOCK,
             Material.SWEET_BERRY_BUSH, Material.WITHER_ROSE, Material.LAVA, Material.POWDER_SNOW};
     private List<Material> damageBlocks = Arrays.asList(damageBlocksMaterials);
+    private int teleportationDelay;
     public HomeCommand(JustHomes plugin) {
         this.plugin = plugin;
         this.prefix = plugin.prefix;
 
         this.playerData = plugin.playerData;
+        this.teleportationDelay = plugin.teleportationDelay;
     }
 
 
@@ -64,14 +66,14 @@ public class HomeCommand {
         if (plugin.simpleProtection) {
             Material middle = loc.getBlock().getType();
             Material below = p.getWorld().getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ()).getType();
-            if (damageBlocks.contains(below) || damageBlocks.contains(middle) || middle == Material.NETHER_PORTAL) {
+            if (damageBlocks.contains(below) || damageBlocks.contains(middle)) {
                 p.sendMessage(prefix + Messages.get("CorruptedHome"));
                 return;
             }
         }
-        int duration = plugin.config.getInt("DelayInTeleport");
+
         HomeNames.addHomeName(uuid, homeName);
-        plugin.teleportPlayer.teleportPlayer(p, loc, duration, homeName);
+        plugin.teleportPlayer.teleportPlayer(p, loc, PermissionChecker.checkDelay(p));
 
 
     }

@@ -37,6 +37,7 @@ public class JustHomes extends JavaPlugin {
 
     public boolean simpleProtection;
     public int homesMaxAmount;
+    public int teleportationDelay;
 
     //Classes
     public Events events;
@@ -51,6 +52,7 @@ public class JustHomes extends JavaPlugin {
     public HomeCommand homeCommand;
     public ListHomeCommand listHome;
     public DeleteHomeCommand deleteHome;
+
     private Metrics metrics;
 
 
@@ -132,6 +134,7 @@ public class JustHomes extends JavaPlugin {
         prefix = config.getString(ChatColor.translateAlternateColorCodes('&', "Prefix"));
         simpleProtection = config.getBoolean("SimpleProtection");
         homesMaxAmount = config.getInt("HomesMaxAmount");
+        teleportationDelay = config.getInt("DelayInTeleport");
 
     }
 
