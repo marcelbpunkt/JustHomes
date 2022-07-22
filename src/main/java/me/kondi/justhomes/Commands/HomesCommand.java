@@ -17,7 +17,6 @@ import net.md_5.bungee.api.chat.hover.content.Text;
 
 public class HomesCommand {
 
-	private static int bedCount = 0;
 	private JustHomesPlugin plugin;
 	private String prefix;
 
@@ -45,7 +44,7 @@ public class HomesCommand {
 
 		Location playerSpawnLocation = p.getBedSpawnLocation();
 		if (playerSpawnLocation != null) {
-			Home playerSpawn = new Home(uuid, Messages.get("Bed") + bedCount++, playerSpawnLocation);
+			Home playerSpawn = new Home(uuid, Messages.get("Bed"), playerSpawnLocation);
 			homes.add(playerSpawn);
 		}
 

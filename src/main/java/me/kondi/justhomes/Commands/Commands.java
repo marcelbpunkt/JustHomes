@@ -1,6 +1,7 @@
 package me.kondi.justhomes.Commands;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -58,30 +59,34 @@ public class Commands implements CommandExecutor, TabCompleter {
 	}
 
 	@Override
-	public ArrayList<String> onTabComplete(@NotNull CommandSender sender, Command cmd, @NotNull String arg2,
-			String[] args) {
+	public List<String> onTabComplete(@NotNull CommandSender sender, Command cmd, @NotNull String arg2, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("delhome") || cmd.getName().equalsIgnoreCase("home")) {
 
 			if (args.length == 1) {
 
-				ArrayList<String> homes = new ArrayList<>();
+				List<String> homeNames = new ArrayList<>();
 				if (!(sender instanceof Player p)) {
 					sender.sendMessage(prefix + Messages.get("NotPlayerException"));
-					return homes;
+					return homeNames;
 				}
 				String uuid = p.getUniqueId().toString();
-				if (plugin.playerData.countPlayerHomes(uuid) == 0) {
-					return homes;
-				}
+//				if (plugin.playerData.countPlayerHomes(uuid) == 0) {
+//					return homes;
+//				}
 
-				List<Home> keys = plugin.playerData.listOfHomes(uuid);
-				for (Home key : keys) {
-					if (key.getHomeName().startsWith(args[0].toLowerCase())) {
-						homes.add(key.getHomeName());
+				List<Home> homes = plugin.playerData.listOfHomes(uuid);
+				for (Home home : homes) {
+					if (home.getHomeName().toLowerCase().startsWith(args[0].toLowerCase())) {
+						homeNames.add(home.getHomeName());
+					}
+				}
+				for (String spawnName : Arrays.asList(Messages.get("WorldSpawn"), Messages.get("Bed"))) {
+					if (spawnName.toLowerCase().startsWith(args[0].toLowerCase())) {
+						homeNames.add(spawnName);
 					}
 				}
 
-				return homes;
+				return homeNames;
 
 			}
 		}
