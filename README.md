@@ -1,51 +1,46 @@
+# JustHomes
 
+![Logo](https://github.com/marcelbpunkt/JustHomes/blob/master/logo.png)
 
-##
-![Logo](https://github.com/Kondee3/JustHomes/blob/master/logo.png)
-It's a repository of my project JustHomes for Spigot and Bukkit servers.
+This is my fork of Kondee3's project JustHomes for Spigot and Bukkit servers.
 
-
-
-
-
-
-## Current Versions
-Currently only 1.14 and 1.19 versions are supported.
-
-Let me know if you want more versions in the comments of spigot page.
+## Supported Minecraft Versions
+Currently only 1.19 is supported and tested.
 
 [![spigotmc](https://img.shields.io/badge/Spigot-JustHomes-yellow)](https://www.spigotmc.org/resources/just-homes.69446/)
-## Dependency
-To use JustHomes you have to download [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/).
+
+## Dependencies
+To use JustHomes you have to install [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) on your server.
 
 ## Langugages
-Contribute to make the list longer :wink:
-|Language|STATUS|
-|--------|------|
-|English|:heavy_check_mark:|
-|Polish|:heavy_check_mark:|
+
+| Language | STATUS             |
+|----------|--------------------|
+| English  | :heavy_check_mark: |
+| German   | :heavy_check_mark: |
+
+No other languages planned so far.
 
 ## Commands
 
-
-| Command             |Alias| Description|
-| --------------------|-----|------------|
-|sethome |sh|You can create homes with it|
-|home|h|Teleports you to your home|
-|listhome|lh|Lists all your homes|
-|delhome|dh|Deletes your home|
-|reloadlanguage|-|Reloads languages|
+| Command        | Description                         |
+|----------------|-------------------------------------|
+| sethome        | Creates a home                      |
+| home           | Teleports you to the specified home |
+| homes          | Lists all your homes                |
+| delhome        | Deletes a specified home            |
+| reloadlanguage | Reloads the language file           |
 
 ## Permissions
 
 
-| Permission               | Player            |
-|--------------------------|-------------------|
-| justhomes.sethome        | Default           |
-| justhomes.home           | Default           |
-| justhomes.listhome       | Default           |
-| justhomes.delhome        | Default           |
-| justhomes.reloadlanguage | OP                |
-| justhomes.maxhomes       | Value  (Default: 5) |
- | justhomes.teleportationdelay| Value (Default: 5)|
+| Permission                   | Player             |
+|------------------------------|--------------------|
+| justhomes.sethome            | Default            |
+| justhomes.home               | Default            |
+| justhomes.homes              | Default            |
+| justhomes.delhome            | Default            |
+| justhomes.reloadlanguage     | OP                 |
+| justhomes.maxhomes           | Value (Default: 5) |
+| justhomes.teleportationdelay | Value (Default: 5) |
 

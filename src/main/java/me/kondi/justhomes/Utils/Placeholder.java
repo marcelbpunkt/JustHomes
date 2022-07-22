@@ -1,9 +1,10 @@
-package me.kondi.JustHomes.Utils;
+package me.kondi.justhomes.Utils;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import me.kondi.JustHomes.Home.HomeNames;
-import me.kondi.JustHomes.JustHomes;
-import me.kondi.JustHomes.Teleportation.TeleportPlayer;
+import me.kondi.justhomes.JustHomesPlugin;
+import me.kondi.justhomes.Home.HomeNames;
+import me.kondi.justhomes.Teleportation.TeleportPlayer;
+
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

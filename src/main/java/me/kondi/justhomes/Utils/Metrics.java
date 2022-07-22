@@ -1,6 +1,6 @@
 
 
-package me.kondi.JustHomes.Utils;
+package me.kondi.justhomes.Utils;
 
 import org.bstats.MetricsBase;
 import org.bstats.charts.CustomChart;

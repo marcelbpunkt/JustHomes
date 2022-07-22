@@ -9,22 +9,29 @@ ListColorOfIndexName: "&6"
 
 #SetHome
 SetOnlyOnGroundException: "&cYou must be on the ground!"
+SpawnOnlyOnGroundException: "&cCannot set world spawn home: world spawn is not on the ground!"
 CorruptedHome: "&cYour home might be corrupted!"
 SpecifyHomeNameException: "&cYou must specify a home name!"
+ManualModifySpawnHomeException: "&cYou cannot set, change or delete the world or player spawn home manually!"
 CreatedHome: "&6%justhomes_homename%&7 has been successfully created!"
 TooMuchHomesException: "&cYou have too much homes! Try deleting any of them."
 UnknownHomeName: "&cUnknown home name!"
 EditedHome: "&6%justhomes_homename%&7 has been edited!"
 
 #Teleportation
-Teleporting: "&7Teleporting in &6%justhomes_teleportationtime% &7seconds! &cDont move!"
-SuccesfullTeleportation: "&7You were succesfully teleported to &6%justhomes_homename%"
-ActionBarNameWhileTeleporting: "&aTeleporting..."
+TeleportingCooldown: "&7Teleporting in &6%justhomes_teleportationtime% &7seconds! &cDont move!"
+SuccessfulTeleportation: "&7You were succesfully teleported to &6%justhomes_homename%"
+Teleporting: "&aTeleporting..."
 TeleportationCancelled: "&cTeleportation Cancelled!"
 UnavailableHome: "&cThat home is no longer available!"
+PlayerSpawnNotFound: "&cYou have no home bed or respawn anchor, or it was obstructed!"
 
 #DeleteHome
 DeletedHome: "&6%justhomes_homename%&7 has been successfully deleted!"
+
+#HomeNames
+WorldSpawn: "worldspawn"
+Bed: "bed"
 
 #Other
 NotHumanException: "You are not a player!"

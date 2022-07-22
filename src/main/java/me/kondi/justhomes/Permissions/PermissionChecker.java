@@ -1,14 +1,15 @@
-package me.kondi.JustHomes.Permissions;
+package me.kondi.justhomes.Permissions;
 
-import me.kondi.JustHomes.JustHomes;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
+import me.kondi.justhomes.JustHomesPlugin;
+
 public class PermissionChecker {
-    private JustHomes plugin;
+    private JustHomesPlugin plugin;
     private static int maxAmount;
     private static int teleportationDelay;
-    public PermissionChecker(JustHomes plugin) {
+    public PermissionChecker(JustHomesPlugin plugin) {
         this.plugin = plugin;
         this.maxAmount = plugin.homesMaxAmount;
         this.teleportationDelay = plugin.teleportationDelay;
