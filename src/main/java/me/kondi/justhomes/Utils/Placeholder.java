@@ -22,7 +22,7 @@ public class Placeholder extends PlaceholderExpansion {
 
 	@Override
 	public @NotNull String getVersion() {
-		return "1.20-SNAPSHOT";
+		return "1.20";
 	}
 
 	@Override
