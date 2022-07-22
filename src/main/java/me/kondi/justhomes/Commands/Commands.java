@@ -39,7 +39,7 @@ public class Commands implements CommandExecutor, TabCompleter {
 			return true;
 		}
 		if (cmd.getName().equalsIgnoreCase("homes") && p.hasPermission("justhomes.homes")) {
-			plugin.homesCommand.executeListHomeCommand(p);
+			plugin.homesCommand.executeHomesCommand(p);
 		}
 		if (cmd.getName().equalsIgnoreCase("delhome") && p.hasPermission("justhomes.delhome")) {
 			plugin.deleteHome.executeDelhomeCommand(p, args);

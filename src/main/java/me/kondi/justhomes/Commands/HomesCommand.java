@@ -15,26 +15,27 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 
-public class ListHomeCommand {
+public class HomesCommand {
 
+	private static int bedCount = 0;
 	private JustHomesPlugin plugin;
 	private String prefix;
 
 	private PlayerData playerData;
 
-	public ListHomeCommand(JustHomesPlugin plugin) {
+	public HomesCommand(JustHomesPlugin plugin) {
 		this.plugin = plugin;
 		this.prefix = plugin.prefix;
 
 		this.playerData = plugin.playerData;
 	}
 
-	public void executeListHomeCommand(Player p) {
+	public void executeHomesCommand(Player p) {
 		String uuid = p.getUniqueId().toString();
-		if (playerData.countPlayerHomes(uuid) == 0) {
-			p.sendMessage(prefix + Messages.get("UserHasNoHomes"));
-			return;
-		}
+//		if (playerData.countPlayerHomes(uuid) == 0) {
+//			p.sendMessage(prefix + Messages.get("UserHasNoHomes"));
+//			return;
+//		}
 
 		// we need a copy since we'll add the spawn point(s) to it for single use
 		List<Home> homes = new ArrayList<>(playerData.listOfHomes(uuid));
@@ -44,15 +45,9 @@ public class ListHomeCommand {
 
 		Location playerSpawnLocation = p.getBedSpawnLocation();
 		if (playerSpawnLocation != null) {
-			Home playerSpawn = new Home(uuid, Messages.get("Bed"), playerSpawnLocation);
+			Home playerSpawn = new Home(uuid, Messages.get("Bed") + bedCount++, playerSpawnLocation);
 			homes.add(playerSpawn);
 		}
-
-		// There is at least the world spawn so this list will never be empty.
-		// if (homes.size() == 0) {
-		// p.sendMessage(prefix + Messages.get("UserHasNoHomes"));
-		// return;
-		// }
 
 		p.sendMessage(Messages.get("ListHomesTitle"));
 

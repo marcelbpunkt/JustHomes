@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import me.kondi.justhomes.Commands.Commands;
 import me.kondi.justhomes.Commands.DeleteHomeCommand;
 import me.kondi.justhomes.Commands.HomeCommand;
-import me.kondi.justhomes.Commands.ListHomeCommand;
+import me.kondi.justhomes.Commands.HomesCommand;
 import me.kondi.justhomes.Commands.SetHomeCommand;
 import me.kondi.justhomes.Commands.SpawnCommand;
 import me.kondi.justhomes.Data.Database;
@@ -49,7 +49,7 @@ public class JustHomesPlugin extends JavaPlugin {
 	// Home commands
 	public SetHomeCommand setHomeCommand;
 	public HomeCommand homeCommand;
-	public ListHomeCommand homesCommand;
+	public HomesCommand homesCommand;
 	public DeleteHomeCommand deleteHome;
 	public SpawnCommand spawnCommand;
 
@@ -103,7 +103,7 @@ public class JustHomesPlugin extends JavaPlugin {
 		teleportPlayer = new TeleportPlayer(this);
 		setHomeCommand = new SetHomeCommand(this);
 		homeCommand = new HomeCommand(this);
-		homesCommand = new ListHomeCommand(this);
+		homesCommand = new HomesCommand(this);
 		deleteHome = new DeleteHomeCommand(this);
 		spawnCommand = new SpawnCommand(this);
 		permissionChecker = new PermissionChecker(this);
