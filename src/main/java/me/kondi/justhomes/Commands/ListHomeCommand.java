@@ -43,8 +43,8 @@ public class ListHomeCommand {
 		homes.add(worldSpawn);
 
 		Location playerSpawnLocation = p.getBedSpawnLocation();
-		Home playerSpawn = new Home(uuid, Messages.get("Bed"), playerSpawnLocation);
-		if (playerSpawn != null) {
+		if (playerSpawnLocation != null) {
+			Home playerSpawn = new Home(uuid, Messages.get("Bed"), playerSpawnLocation);
 			homes.add(playerSpawn);
 		}
 
