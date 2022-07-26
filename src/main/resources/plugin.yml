@@ -1,5 +1,5 @@
 name: JustHomes
-version: "1.20"
+version: "1.20.1"
 description: Homes plugin, create home and enjoy.
 api-version: "1.19"
 authors: [Kondee3, marcelbpunkt]
@@ -12,9 +12,6 @@ commands:
   home:
     description: Teleports you to your home.
     usage: /<command> <homename>
-  spawn:
-    description: Teleports you to your player spawn.
-    usage: /<command>
   homes:
     description: Lists all your homes.
     usage: /<command>
@@ -32,9 +29,6 @@ permissions:
   justhomes.home:
     description: Allows you to teleport to homes.
     default: true
-  justhomes.spawn:
-    description: Allows you to teleport to your player spawn.
-    default: true
   justhomes.homes:
     description: Allows you to list your homes.
     default: true
@@ -44,4 +38,3 @@ permissions:
   justhomes.reloadlanguage:
     description: Allows you to fast reload language.
     default: op
-

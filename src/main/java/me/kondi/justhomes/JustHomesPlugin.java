@@ -9,7 +9,6 @@ import me.kondi.justhomes.Commands.DeleteHomeCommand;
 import me.kondi.justhomes.Commands.HomeCommand;
 import me.kondi.justhomes.Commands.HomesCommand;
 import me.kondi.justhomes.Commands.SetHomeCommand;
-import me.kondi.justhomes.Commands.SpawnCommand;
 import me.kondi.justhomes.Data.Database;
 import me.kondi.justhomes.Data.PlayerData;
 import me.kondi.justhomes.Home.HomeNames;
@@ -51,7 +50,6 @@ public class JustHomesPlugin extends JavaPlugin {
 	public HomeCommand homeCommand;
 	public HomesCommand homesCommand;
 	public DeleteHomeCommand deleteHome;
-	public SpawnCommand spawnCommand;
 
 	private Metrics metrics;
 
@@ -105,7 +103,6 @@ public class JustHomesPlugin extends JavaPlugin {
 		homeCommand = new HomeCommand(this);
 		homesCommand = new HomesCommand(this);
 		deleteHome = new DeleteHomeCommand(this);
-		spawnCommand = new SpawnCommand(this);
 		permissionChecker = new PermissionChecker(this);
 		homeNames = new HomeNames();
 		new Placeholder().register();

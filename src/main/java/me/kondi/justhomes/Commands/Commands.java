@@ -51,9 +51,6 @@ public class Commands implements CommandExecutor, TabCompleter {
 		if (cmd.getName().equalsIgnoreCase("home") && p.hasPermission("justhomes.home")) {
 			plugin.homeCommand.executeHomeCommand(p, args);
 		}
-		if (cmd.getName().equalsIgnoreCase("spawn") && p.hasPermission("justhomes.spawn")) {
-			plugin.spawnCommand.executeSpawnCommand(p);
-		}
 
 		return true;
 	}

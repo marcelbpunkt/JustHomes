@@ -1,10 +1,10 @@
-Prefix: "JHomes >> "
+Prefix: "[JHomes] "
 
 #Specify max amount of homes for players
 HomesMaxAmount: 5
 
 #In seconds
-DelayInTeleport: 5
+DelayInTeleport: 0
 
 #All available languages in documentation
 Language: English
